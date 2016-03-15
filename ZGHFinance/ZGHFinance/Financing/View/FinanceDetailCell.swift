@@ -74,7 +74,7 @@ class FinanceDetailCellView : UIView , UIWebViewDelegate {
     private func initUI() {
         
         let topSep              = UIView()
-        topSep.backgroundColor  = UtilTool.colorWithHexString("#e5e5e5")
+        topSep.backgroundColor  = UtilTool.colorWithHexString("#efefef")
         
         titleLabel              = UILabel()
         titleLabel.font         = UIFont.systemFontOfSize(12)

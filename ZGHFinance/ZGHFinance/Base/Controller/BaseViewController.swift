@@ -96,7 +96,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     func initUI()
     {
         
-        self.view.backgroundColor   = UtilTool.colorWithHexString("#e5e5e5")
+        self.view.backgroundColor   = UtilTool.colorWithHexString("#efefef")
         if self.needBgImageView()
         {
         }

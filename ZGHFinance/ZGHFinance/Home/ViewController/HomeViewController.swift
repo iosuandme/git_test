@@ -139,7 +139,7 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
             return nil
         }
         let hv                  = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 50))
-        hv.backgroundColor      = UtilTool.colorWithHexString("#e5e5e5")
+        hv.backgroundColor      = UtilTool.colorWithHexString("#efefef")
         let hintLabel           = UILabel()
         hintLabel.text          = section == 0 ? "推荐投资项目" : "赣核公益"
         hintLabel.font          = UIFont.systemFontOfSize(16)

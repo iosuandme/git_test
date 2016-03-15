@@ -65,7 +65,7 @@ class FinanceRecordCell: UITableViewCell {
         expectLabel.text              = "有效金额"
         expectProfit.font             = UIFont.systemFontOfSize(12)
         expectProfit.textColor        = UtilTool.colorWithHexString("#666")
-        sepLine.backgroundColor       = UtilTool.colorWithHexString("#e5e5e5")
+        sepLine.backgroundColor       = UtilTool.colorWithHexString("#efefef")
     }
     
     private func addConstraints() {
