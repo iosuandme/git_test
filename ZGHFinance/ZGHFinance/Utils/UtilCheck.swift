@@ -133,8 +133,13 @@ class UtilCheck {
     
     //是否登录 true:已登录 false:没有登录
     class func isLogin() -> Bool {
-        let web_qtstr = UtilCookie.getCookieByKey("web_qtstr")
-        return !web_qtstr.isEmpty
+        //let web_qtstr = UtilCookie.getCookieByKey("web_qtstr")
+        //return !web_qtstr.isEmpty
+        if let _ = Commond.getUserDefaults("userData") as? UCUserData {
+            return true
+        }else{
+            return false
+        }
     }
     
     //跳转到登录页面

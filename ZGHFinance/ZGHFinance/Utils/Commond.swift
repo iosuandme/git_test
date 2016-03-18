@@ -48,11 +48,20 @@ class Commond: NSObject {
     }
     //获取用户偏好信息
     class func getUserDefaults(key : String) -> AnyObject? {
-       return NSUserDefaults.standardUserDefaults().objectForKey(key)
+        var data = NSUserDefaults.standardUserDefaults().objectForKey(key)
+        if data != nil && data is NSData {
+            data = NSKeyedUnarchiver.unarchiveObjectWithData(data as! NSData)
+        }
+        return data
     }
     //设置用户偏好信息
     class func setUserDefaults(obj : AnyObject , key : String) {
-        NSUserDefaults.standardUserDefaults().setObject(obj, forKey: key)
+        if obj is BaseData {
+            let data = NSKeyedArchiver.archivedDataWithRootObject(obj)
+            NSUserDefaults.standardUserDefaults().setObject(data, forKey: key)
+        }else{
+            NSUserDefaults.standardUserDefaults().setObject(obj, forKey: key)
+        }
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     //删除某条偏好信息

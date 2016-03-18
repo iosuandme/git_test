@@ -30,6 +30,7 @@ class HomeBenefitDetailViewController: BaseViewController , UITableViewDataSourc
     private var recordList      : Array<FinanceRecordDetailData> = Array()
     private var headerView      : HomeBenefitHeaderView?
     private var detailData      : HomeBenefitDetailData!
+    private var isShow          : Bool                           = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,10 @@ class HomeBenefitDetailViewController: BaseViewController , UITableViewDataSourc
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         refreshData()
+    }
+    
+    override func needRefrshData() -> Bool {
+        return false
     }
     
     override func initUI() {
@@ -105,7 +110,9 @@ class HomeBenefitDetailViewController: BaseViewController , UITableViewDataSourc
                     self.detailData.content = self.detailData.content
                     self.headerView?.showHeaderData(self.detailData)
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-                        self.tableView?.reloadData()
+                        if !self.isShow {
+                            self.tableView?.reloadData()
+                        }
                     }
                 }else{
                     UtilTool.noticError(view: self.view, msg: detail!.responseMsg!)
@@ -174,6 +181,11 @@ class HomeBenefitDetailViewController: BaseViewController , UITableViewDataSourc
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if selectedIndex == 0 {
             if detailData != nil && !detailData.content.isEmpty {
+                if detailData.contentHeight > 100 {
+                    isShow  = true
+                }else{
+                    isShow  = false
+                }
                 return detailData.contentHeight + 78
             }else{
                 return 0
@@ -203,6 +215,7 @@ class HomeBenefitDetailViewController: BaseViewController , UITableViewDataSourc
             if detailData != nil && !detailData.content.isEmpty {
                 tableView?.reloadData()
             }else{
+                isShow      = false
                 refreshData()
             }
         }else{
@@ -211,7 +224,11 @@ class HomeBenefitDetailViewController: BaseViewController , UITableViewDataSourc
     }
     
     func benefitHeaderTouchEvent() {
-        print("投资")
+        let loginVc         = UCLoginViewController()
+        loginVc.callBack    = {Void in
+            print("登录成功")
+        }
+        self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
     }
     
 }

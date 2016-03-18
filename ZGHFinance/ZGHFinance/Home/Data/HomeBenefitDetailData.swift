@@ -32,7 +32,7 @@ class HomeBenefitDetailData: BaseData , UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         webView.sizeToFit()
-        self.contentHeight      = self.webView.frame.maxY
+        self.contentHeight      = webView.frame.maxY
         webView.removeFromSuperview()
         webView.delegate        = nil
     }

@@ -83,10 +83,14 @@ class BaseRequest: NSObject
         return true
     }
     
+    func needCommonParameters() -> Bool {
+        return true
+    }
+    
     func decodeJsonRequestData(responseDic : Dictionary<String,AnyObject>) -> BaseData
     {
         let baseData : BaseData         = BaseData()
-        baseData.cjxnfsCode           = responseDic["code"] as? Int
+        baseData.cjxnfsCode             = responseDic["code"] as? Int
         baseData.responseMsg            = responseDic["msg"] as? String
         baseData.responseData           = responseDic["data"]
         return baseData
@@ -257,7 +261,9 @@ class BaseRequest: NSObject
                 
             }else
             {
-                baseData = nil;
+                baseData                        = BaseData();
+                baseData?.cjxnfsCode            = 10004
+                baseData?.responseMsg           = "数据异常"
             }
             if(self.completionBlock != nil)
             {
@@ -299,8 +305,9 @@ class BaseRequest: NSObject
             
             self.toastView?.dismiss()
         }
-
-        self.prepareCommonParameters()
+        if needCommonParameters() {
+            self.prepareCommonParameters()
+        }
         if self.requestParamDic == nil
         {
             self.requestParamDic = Dictionary<String,AnyObject>()

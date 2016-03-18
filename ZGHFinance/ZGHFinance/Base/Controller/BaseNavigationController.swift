@@ -19,10 +19,7 @@ class BaseNavigationController: UINavigationController, UINavigationControllerDe
         self.navigationBar.barTintColor                     = UIColor.whiteColor()
         self.navigationBar.titleTextAttributes              = [NSFontAttributeName : UIFont(name: "Avenir", size: NAVI_FONT_SIZE)!,NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationBar.tintColor                        = UIColor.whiteColor()
-        self.view.layer.backgroundColor                     = UIColor.clearColor().CGColor
         UIApplication.sharedApplication().statusBarStyle    = UIStatusBarStyle.Default
-//        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "main_navi_bg")!.resizableImageWithCapInsets(UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .Stretch), forBarMetrics: .Default)
-//        self.navigationBar.shadowImage                      = UIImage(named: "main_navi_alpha")
         self.navigationBar.translucent                      = false
         
     }
