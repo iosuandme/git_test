@@ -12,10 +12,8 @@ class UCLoginViewController: BaseViewController {
 
     var callBack            : (() -> Void)?
     private var optionView  : UIView!
-    private var phoneIcon   : UIImageView!
-    private var phoneText   : UITextField!
-    private var pwdIcon     : UIImageView!
-    private var pwdText     : UITextField!
+    private var phoneInput  : UCInputView!
+    private var pwdInput    : UCInputView!
     private var loginButton : BaseButton!
     private var registerBtn : BaseButton!
     
@@ -40,7 +38,7 @@ class UCLoginViewController: BaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        phoneText.becomeFirstResponder()
+        //phoneText.becomeFirstResponder()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -55,24 +53,14 @@ class UCLoginViewController: BaseViewController {
         optionView.layer.borderWidth    = 1
         optionView.layer.borderColor    = UtilTool.colorWithHexString("#ddd").CGColor
         
-        phoneIcon                       = UIImageView(image: UIImage(named: "uc_login_phone"))
+        phoneInput                      = UCInputView(type: .Normal, delegate: nil, needLine: true)
+        phoneInput.placeholder          = "请输入用户名/手机号"
+        phoneInput.iconImage            = UIImage(named: "uc_login_phone")
         
-        phoneText                       = UITextField()
-        phoneText.font                  = UIFont.systemFontOfSize(12)
-        phoneText.textColor             = UtilTool.colorWithHexString("#666")
-        phoneText.placeholder           = "请输入用户名/手机号"
-        phoneText.tag                   = 666
-        phoneText.addTarget(self, action: "textFieldDidChanged:", forControlEvents: UIControlEvents.EditingChanged)
-        
-        pwdIcon                         = UIImageView(image: UIImage(named: "uc_login_lock"))
-        
-        pwdText                         = UITextField()
-        pwdText.secureTextEntry         = true
-        pwdText.font                    = UIFont.systemFontOfSize(12)
-        pwdText.textColor               = UtilTool.colorWithHexString("#666")
-        pwdText.placeholder             = "请输入密码"
-        pwdText.tag                     = 777
-        pwdText.addTarget(self, action: "textFieldDidChanged:", forControlEvents: UIControlEvents.EditingChanged)
+        pwdInput                        = UCInputView(type: .Normal, delegate: nil, needLine: false)
+        pwdInput.placeholder            = "请输入密码"
+        pwdInput.secureTextEntry        = true
+        pwdInput.iconImage              = UIImage(named: "uc_login_lock")
         
         loginButton                     = BaseButton()
         loginButton.layer.cornerRadius  = 4
@@ -81,14 +69,14 @@ class UCLoginViewController: BaseViewController {
         loginButton.tag                 = 888
         loginButton.setTitle("登录", forState: UIControlState.Normal)
         loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        loginButton.addTarget(self, action: "buttonTaoAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        loginButton.addTarget(self, action: "buttonTapAction:", forControlEvents: UIControlEvents.TouchUpInside)
         
         registerBtn                     = BaseButton()
         registerBtn.titleLabel?.font    = UIFont.systemFontOfSize(12)
         registerBtn.tag                 = 999
         registerBtn.setTitle("没有账户？立即注册", forState: UIControlState.Normal)
         registerBtn.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
-        registerBtn.addTarget(self, action: "buttonTaoAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        registerBtn.addTarget(self, action: "buttonTapAction:", forControlEvents: UIControlEvents.TouchUpInside)
         
         let sepLine                     = UIView()
         sepLine.backgroundColor         = UtilTool.colorWithHexString("#ddd")
@@ -96,50 +84,28 @@ class UCLoginViewController: BaseViewController {
         self.view.addSubview(optionView)
         self.view.addSubview(loginButton)
         self.view.addSubview(registerBtn)
-        optionView.addSubview(phoneIcon)
-        optionView.addSubview(phoneText)
-        optionView.addSubview(sepLine)
-        optionView.addSubview(pwdIcon)
-        optionView.addSubview(pwdText)
+        optionView.addSubview(phoneInput)
+        optionView.addSubview(pwdInput)
         
         optionView.mas_makeConstraints { (maker) -> Void in
             maker.left.equalTo()(self.view).offset()(16)
             maker.right.equalTo()(self.view).offset()(-16)
             maker.top.equalTo()(self.view).offset()(30)
-            maker.height.equalTo()(81)
+            maker.height.equalTo()(80)
         }
         
-        phoneIcon.mas_makeConstraints { (maker) -> Void in
-            maker.left.equalTo()(self.optionView).offset()(16)
-            maker.top.equalTo()(self.optionView).offset()(10.5)
-            maker.width.equalTo()(15)
-            maker.height.equalTo()(19)
-        }
-        
-        phoneText.mas_makeConstraints { (maker) -> Void in
-            maker.left.equalTo()(self.phoneIcon.mas_right).offset()(24)
-            maker.right.equalTo()(self.optionView).offset()(-16)
-            maker.top.equalTo()(self.optionView)
-            maker.height.equalTo()(40)
-        }
-        
-        sepLine.mas_makeConstraints { (maker) -> Void in
+        phoneInput.mas_makeConstraints { (maker) -> Void in
             maker.left.equalTo()(self.optionView)
+            maker.top.equalTo()(self.optionView)
             maker.right.equalTo()(self.optionView)
-            maker.top.equalTo()(self.phoneText.mas_bottom)
-            maker.height.equalTo()(1)
+            maker.height.equalTo()(self.optionView).multipliedBy()(0.5)
         }
         
-        pwdText.mas_makeConstraints { (maker) -> Void in
-            maker.left.equalTo()(self.phoneText)
-            maker.right.equalTo()(self.phoneText)
+        pwdInput.mas_makeConstraints { (maker) -> Void in
+            maker.left.equalTo()(self.optionView)
             maker.bottom.equalTo()(self.optionView)
-            maker.height.equalTo()(40)
-        }
-        
-        pwdIcon.mas_makeConstraints { (maker) -> Void in
-            maker.left.equalTo()(self.phoneIcon)
-            maker.centerY.equalTo()(self.pwdText)
+            maker.right.equalTo()(self.optionView)
+            maker.height.equalTo()(self.optionView).multipliedBy()(0.5)
         }
         
         loginButton.mas_makeConstraints { (maker) -> Void in
@@ -173,19 +139,19 @@ class UCLoginViewController: BaseViewController {
         //限制规则
     }
     
-    @objc private func buttonTaoAction(button : UIButton) {
+    @objc private func buttonTapAction(button : UIButton) {
         self.view.endEditing(true)
         
         if button.tag == 888 {
-            let username = phoneText.text!
-            let password = pwdText.text!
+            let username = phoneInput.text!
+            let password = pwdInput.text!
             var error   = ""
             if username.isEmpty {
                 error   = "请填写用户名"
-                phoneText.becomeFirstResponder()
+                phoneInput.becomeFirstResponder()
             }else if password.isEmpty {
                 error   = "请输入密码"
-                pwdText.becomeFirstResponder()
+                pwdInput.becomeFirstResponder()
             }
             
             if error.isEmpty {
@@ -213,7 +179,8 @@ class UCLoginViewController: BaseViewController {
                 UtilTool.noticError(view: self.view, msg: error)
             }
         }else{
-            
+            let registerVc          = UCRegisterViewController()
+            self.navigationController?.pushViewController(registerVc, animated: true)
         }
     }
 
