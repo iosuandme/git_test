@@ -20,4 +20,9 @@ class UCService: BaseService {
         self.doRequest(request, completion: completion, failure: failure)
     }
     
+    class func sendMbCodeWithPhone(phone : String , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCMobileCodeRequest(phone: phone)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
+    
 }

@@ -38,7 +38,7 @@ class UtilCheck {
                         case 9:
                             return false
                         default:
-                            print("OK")
+                            break
                         }
                     }
                     index++

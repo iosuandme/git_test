@@ -60,6 +60,7 @@
 		6B6FC0BF1C9276D700F15227 /* FinanceDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FC0BE1C9276D700F15227 /* FinanceDetailData.swift */; };
 		6B6FC0C11C92C8D500F15227 /* FinanceDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FC0C01C92C8D500F15227 /* FinanceDetailCell.swift */; };
 		6B6FC0C31C92C8ED00F15227 /* FinanceRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FC0C21C92C8ED00F15227 /* FinanceRecordCell.swift */; };
+		6B7A6DF01C9FDB1D00B25E13 /* UCMobileCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */; };
 		6B9D6BF01C993FCC000F6167 /* UCUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */; };
 		6B9D6BF21C9947B5000F6167 /* UCCheckLoginValidRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D6BF11C9947B5000F6167 /* UCCheckLoginValidRequest.swift */; };
 		6B9D6BF41C9948B3000F6167 /* UCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D6BF31C9948B3000F6167 /* UCService.swift */; };
@@ -151,6 +152,7 @@
 		6B6FC0BE1C9276D700F15227 /* FinanceDetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceDetailData.swift; sourceTree = "<group>"; };
 		6B6FC0C01C92C8D500F15227 /* FinanceDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceDetailCell.swift; sourceTree = "<group>"; };
 		6B6FC0C21C92C8ED00F15227 /* FinanceRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceRecordCell.swift; sourceTree = "<group>"; };
+		6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCMobileCodeRequest.swift; sourceTree = "<group>"; };
 		6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCUserData.swift; sourceTree = "<group>"; };
 		6B9D6BF11C9947B5000F6167 /* UCCheckLoginValidRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCCheckLoginValidRequest.swift; sourceTree = "<group>"; };
 		6B9D6BF31C9948B3000F6167 /* UCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCService.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 			children = (
 				6BDA68211C993E7A00D0CBF3 /* UCLoginRequest.swift */,
 				6B9D6BF11C9947B5000F6167 /* UCCheckLoginValidRequest.swift */,
+				6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */,
 			);
 			path = Net;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				6B46E9551C8E87FF00F7B009 /* ToastView.swift in Sources */,
 				6B46E9BF1C8EC8E100F7B009 /* YRPageItem.swift in Sources */,
 				6B46E9731C8E899D00F7B009 /* UtilNumber.swift in Sources */,
+				6B7A6DF01C9FDB1D00B25E13 /* UCMobileCodeRequest.swift in Sources */,
 				6BDA681C1C9804DB00D0CBF3 /* HomeBenefitDetailData.swift in Sources */,
 				6B6226791C90667F00DDA79B /* FinancingListRequest.swift in Sources */,
 				6B46E9C21C8ED83C00F7B009 /* HomeInvestCell.swift in Sources */,

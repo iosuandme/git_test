@@ -18,6 +18,7 @@ class UCRegisterViewController: BaseViewController , UCInputViewDelegate {
     private var repwdInput  : UCInputView!
     private var mbCodeInput : UCInputView!
     private var registerBtn : BaseButton!
+    private var tInterval   : Int               = 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,26 +56,26 @@ class UCRegisterViewController: BaseViewController , UCInputViewDelegate {
         optionView.layer.borderColor    = UtilTool.colorWithHexString("#ddd").CGColor
         
         phoneInput                      = UCInputView(type: .Normal, delegate: self, needLine: true)
-        phoneInput.placeholder          = "请输入手机号"
+        phoneInput.placeholder          = "输入手机号"
         phoneInput.keyboardType         = .NumberPad
         phoneInput.iconImage            = UIImage(named: "uc_login_phone")
         
         userName                        = UCInputView(type: .Normal, delegate: self, needLine: true)
-        userName.placeholder            = "请输入用户名"
+        userName.placeholder            = "输入用户名（仅数字、字母、中文）"
         userName.iconImage              = UIImage(named: "uc_tab_icon")
         
         pwdInput                        = UCInputView(type: .Normal, delegate: self, needLine: true)
-        pwdInput.placeholder            = "请输入密码"
+        pwdInput.placeholder            = "输入密码"
         pwdInput.secureTextEntry        = true
         pwdInput.iconImage              = UIImage(named: "uc_login_lock")
         
         repwdInput                      = UCInputView(type: .Normal, delegate: self, needLine: true)
-        repwdInput.placeholder          = "请再次输入密码"
+        repwdInput.placeholder          = "再次输入密码"
         repwdInput.secureTextEntry      = true
         repwdInput.iconImage            = UIImage(named: "uc_login_lock")
         
         mbCodeInput                     = UCInputView(type: .WithButton, delegate: self, needLine: false)
-        mbCodeInput.placeholder         = "请输入验证码"
+        mbCodeInput.placeholder         = "输入验证码"
         mbCodeInput.keyboardType        = .NumberPad
         mbCodeInput.btnTitle            = "获取验证码"
         mbCodeInput.iconImage           = UIImage(named: "uc_login_key")
@@ -146,14 +147,104 @@ class UCRegisterViewController: BaseViewController , UCInputViewDelegate {
     }
     
     @objc private func buttonTapAction(btn : UIButton) {
-        print("注册")
         self.view.endEditing(true)
+        var error           = ""
+        if phoneInput.text!.isEmpty {
+            error           = "请输入手机号码"
+            phoneInput.becomeFirstResponder()
+        }else if userName.text!.isEmpty {
+            error           = "请输入用户名"
+            userName.becomeFirstResponder()
+        }else if pwdInput.text!.isEmpty {
+            error           = "请输入密码"
+            pwdInput.becomeFirstResponder()
+        }else if repwdInput.text!.isEmpty {
+            error           = "请确认密码"
+            repwdInput.becomeFirstResponder()
+        }else if mbCodeInput.text!.isEmpty {
+            error           = "请输入手机验证码"
+            mbCodeInput.becomeFirstResponder()
+        }else if !UtilCheck.checkMobile(phoneInput.text!) {
+            error           = "手机号码输入有误"
+            phoneInput.becomeFirstResponder()
+        }else if !checkUsernameValid(userName.text!) {
+            error           = "用户名不合规范（仅数字、字母、中文）"
+            userName.becomeFirstResponder()
+        }else if pwdInput.text! != repwdInput.text! {
+            error           = "两次的密码不同"
+            pwdInput.becomeFirstResponder()
+        }
+        if !error.isEmpty {
+            UtilTool.noticError(view: self.view, msg: error)
+        }else{
+            UtilTool.noticError(view: self.view, msg: "合法注册")
+        }
+    }
+    
+    @objc private func timeCount(timer : NSTimer) {
+        tInterval--
+        let button          = timer.userInfo as! UIButton
+        if tInterval == 0 {
+            button.setTitle("重发验证码", forState: UIControlState.Normal)
+            button.enabled  = true
+            tInterval       = 60
+            timer.invalidate()
+        }else{
+            button.setTitle("\(tInterval)秒后重发", forState: UIControlState.Normal)
+        }
+        
+    }
+    
+    private func checkUsernameValid(username : String) -> Bool {
+        
+        for s in username.characters {
+            let str         = String(s)
+            var isChinese   = false
+            var isNotOther  = false
+            let ch          = (str as NSString).characterAtIndex(0)
+            if (ch > 0x4e00 && ch < 0x9fff) {
+                isChinese   = true
+            }else{
+                if let asc     = getASCIIForChar(str) {
+                    switch asc {
+                    case 65...90 :
+                        fallthrough
+                    case 97...122 :
+                        fallthrough
+                    case 48...57 :
+                        isNotOther  = true
+                    default :
+                        isNotOther  = false
+                    }
+                }else{
+                    isNotOther      = false
+                }
+            }
+            
+            if !isChinese && !isNotOther {
+                return false
+            }
+            
+        }
+        return true
     }
     
     //MARK: Delegate
     
     func inputViewButtonTap(inputView: UCInputView, actionButton: UIButton) {
-        print("获取验证码")
+        let phone = phoneInput.text!
+        if phone.isEmpty {
+            UtilTool.noticError(view: self.view, msg: "请输入手机号")
+        }else if !UtilCheck.checkMobile(phone){
+            UtilTool.noticError(view: self.view, msg: "请输入正确手机号")
+        }else{
+            UCService.sendMbCodeWithPhone(phone, completion: { (data) -> Void in
+                }, failure: { (error) -> Void in
+            })
+            actionButton.setTitle("\(tInterval)秒后重发", forState: UIControlState.Normal)
+            actionButton.enabled    = false
+            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeCount:", userInfo: actionButton, repeats: true)
+        }
     }
     
     func inputViewDidChanged(inputView: UCInputView, withInputString string: String) {

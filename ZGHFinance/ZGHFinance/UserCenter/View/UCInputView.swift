@@ -77,6 +77,7 @@ class UCInputView: UIView , UCInputViewDelegate {
     init(type: UCInputViewType , delegate : UCInputViewDelegate? , needLine : Bool) {
         super.init(frame: CGRectZero)
         
+        self.delegate               = delegate
         icon                        = UIImageView()
         icon.image                  = iconImage
         self.addSubview(icon)
