@@ -177,7 +177,18 @@ class UCRegisterViewController: BaseViewController , UCInputViewDelegate {
         if !error.isEmpty {
             UtilTool.noticError(view: self.view, msg: error)
         }else{
-            UtilTool.noticError(view: self.view, msg: "合法注册")
+            let params = ["cellPhone" : phoneInput.text! , "loginPassword" : pwdInput.text! , "username" : userName.text! , "checkCode" : mbCodeInput.text!]
+            UCService.registerActionWithParams(params, completion: { (registerData) -> Void in
+                if registerData?.cjxnfsCode == 10000 {
+                    UtilTool.noticError(view: self.view, msg: "注册成功", offset: 0, time: 0.5, complete: { () -> Void in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
+                }else{
+                    UtilTool.noticError(view: self.view, msg: registerData!.responseMsg!)
+                }
+                }, failure: { (error) -> Void in
+                    UtilTool.noticError(view: self.view, msg: error.msg!)
+            })
         }
     }
     

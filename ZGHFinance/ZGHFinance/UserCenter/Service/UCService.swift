@@ -25,4 +25,8 @@ class UCService: BaseService {
         self.doRequest(request, completion: completion, failure: failure)
     }
     
+    class func registerActionWithParams(params : Dictionary<String , AnyObject> , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCRegisterRequest(params: params)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
 }

@@ -84,6 +84,7 @@
 		6BDA681E1C98110800D0CBF3 /* HomeBenefitRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA681D1C98110800D0CBF3 /* HomeBenefitRecordRequest.swift */; };
 		6BDA68201C98FD4F00D0CBF3 /* UCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA681F1C98FD4F00D0CBF3 /* UCLoginViewController.swift */; };
 		6BDA68221C993E7A00D0CBF3 /* UCLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA68211C993E7A00D0CBF3 /* UCLoginRequest.swift */; };
+		6BF91AA41CBA2D9B00F90B6C /* UCRegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF91AA31CBA2D9B00F90B6C /* UCRegisterRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		6BDA681D1C98110800D0CBF3 /* HomeBenefitRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBenefitRecordRequest.swift; sourceTree = "<group>"; };
 		6BDA681F1C98FD4F00D0CBF3 /* UCLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCLoginViewController.swift; sourceTree = "<group>"; };
 		6BDA68211C993E7A00D0CBF3 /* UCLoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCLoginRequest.swift; sourceTree = "<group>"; };
+		6BF91AA31CBA2D9B00F90B6C /* UCRegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCRegisterRequest.swift; sourceTree = "<group>"; };
 		91610957D11A8C1149973BB8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F1BF64EAA6DD225FF6081D74 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -544,6 +546,7 @@
 				6BDA68211C993E7A00D0CBF3 /* UCLoginRequest.swift */,
 				6B9D6BF11C9947B5000F6167 /* UCCheckLoginValidRequest.swift */,
 				6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */,
+				6BF91AA31CBA2D9B00F90B6C /* UCRegisterRequest.swift */,
 			);
 			path = Net;
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 				6B46E94F1C8E87FF00F7B009 /* NetCommonFun.swift in Sources */,
 				6B6226771C90664100DDA79B /* FinancingService.swift in Sources */,
 				6B6FC0C11C92C8D500F15227 /* FinanceDetailCell.swift in Sources */,
+				6BF91AA41CBA2D9B00F90B6C /* UCRegisterRequest.swift in Sources */,
 				6B46E9771C8E899D00F7B009 /* GesturePasswordView.swift in Sources */,
 				6B46E9691C8E899D00F7B009 /* Commond.swift in Sources */,
 				6B9D6BF01C993FCC000F6167 /* UCUserData.swift in Sources */,
