@@ -48,6 +48,8 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         })
         
         let headerView              = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 300))
+        headerView.backgroundColor  = UtilTool.colorWithHexString("#efefef")
+        
         
         let topView                 = UIView()
         topView.backgroundColor     = UIColor.whiteColor()
