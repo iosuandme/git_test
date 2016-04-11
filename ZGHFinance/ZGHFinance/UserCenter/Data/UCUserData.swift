@@ -15,6 +15,7 @@ class UCUserData: BaseData , NSCoding {
     var loginToken  : String = ""
     var username    : String = ""
     var id          : String = ""
+    var timeStamp   : Int    = 0
     
     override init() {
         super.init()
@@ -27,6 +28,7 @@ class UCUserData: BaseData , NSCoding {
         loginToken  = aDecoder.decodeObjectForKey("loginToken") + ""
         username    = aDecoder.decodeObjectForKey("username") + ""
         id          = aDecoder.decodeObjectForKey("id") + ""
+        timeStamp   = Int(aDecoder.decodeInt64ForKey("timeStamp"))
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -35,6 +37,7 @@ class UCUserData: BaseData , NSCoding {
         aCoder.encodeObject(loginToken, forKey: "loginToken")
         aCoder.encodeObject(username, forKey: "username")
         aCoder.encodeObject(id, forKey: "id")
+        aCoder.encodeInt64(Int64(timeStamp), forKey: "timeStamp")
     }
     
 }

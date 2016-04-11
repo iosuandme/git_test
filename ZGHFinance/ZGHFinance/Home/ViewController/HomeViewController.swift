@@ -24,7 +24,6 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
         UtilTool.addTabBarToController(self)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
             self.refreshData()
-            self.checkLoginEnableAction()
         }
     }
     
@@ -82,31 +81,6 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
                 UtilTool.noticError(view: self.view, msg: error.msg!)
         }
         
-    }
-    
-    private func checkLoginEnableAction() {
-        if let userData = Commond.getUserDefaults("userData") as? UCUserData {
-            UCService.checkLoginValid(userData.loginToken, completion: { (data) -> Void in
-                if data?.cjxnfsCode == 10004 {
-                    UCService.loginActionWithUsername(userData.loginName, loginPassword: userData.password, completion: { (loginData) -> Void in
-                        if loginData?.cjxnfsCode == 10000 {
-                            let tmpUser         = loginData as! UCUserData
-                            tmpUser.loginName   = userData.loginName
-                            tmpUser.password    = userData.password
-                            Commond.setUserDefaults(tmpUser, key: "userData")
-                        }else{
-                            Commond.removeUserDefaults("userData")
-                        }
-                        }, failure: { (error) -> Void in
-                            Commond.removeUserDefaults("userData")
-                    })
-                }else{
-                    print("有效")
-                }
-                }, failure: { (error) -> Void in
-                    //Commond.removeUserDefaults("userData")
-            })
-        }
     }
     
     override func needRefrshData() -> Bool {

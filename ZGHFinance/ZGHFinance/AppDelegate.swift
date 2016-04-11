@@ -39,7 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+            if let uData = Commond.getUserDefaults("userData") as? UCUserData where !UtilCheck.isLogin() {
+                UCLoginViewController.autoLoginWithUserData(uData, succ: { 
+                    print("自动登录成功")
+                    }, failure: { 
+                        print("自动登录失败")
+                })
+            }
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

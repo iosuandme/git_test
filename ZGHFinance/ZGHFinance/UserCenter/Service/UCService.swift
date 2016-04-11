@@ -15,11 +15,6 @@ class UCService: BaseService {
         self.doRequest(request, completion: completion, failure: failure)
     }
     
-    class func checkLoginValid(loginToken : String , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
-        let request = UCCheckLoginValidRequest(loginToken: loginToken)
-        self.doRequest(request, completion: completion, failure: failure)
-    }
-    
     class func sendMbCodeWithPhone(phone : String , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
         let request = UCMobileCodeRequest(phone: phone)
         self.doRequest(request, completion: completion, failure: failure)
@@ -27,6 +22,16 @@ class UCService: BaseService {
     
     class func registerActionWithParams(params : Dictionary<String , AnyObject> , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
         let request = UCRegisterRequest(params: params)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
+    
+    class func getUserDataWithToken(token : String , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCGetUserDataRequest(token: token)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
+    
+    class func getAccountDataWithToken(token : String , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCGetAccountDataRequest(token: token)
         self.doRequest(request, completion: completion, failure: failure)
     }
 }

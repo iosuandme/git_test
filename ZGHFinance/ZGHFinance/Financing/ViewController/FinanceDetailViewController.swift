@@ -198,7 +198,15 @@ class FinanceDetailViewController: BaseViewController , UITableViewDataSource , 
     }
     
     func detailHeaderTouchEvent() {
-        print("投资")
+        if UtilCheck.isLogin() {
+            print("登陆投资")
+        }else{
+            let loginVc         = UCLoginViewController()
+            loginVc.callBack    = {Void in
+                print("登陆投资")
+            }
+            self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+        }
     }
 
 }

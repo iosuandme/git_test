@@ -164,16 +164,19 @@ class UCLoginViewController: BaseViewController {
                         let userData        = loginData as! UCUserData
                         userData.loginName  = username
                         userData.password   = password
+                        userData.timeStamp  = UtilDateTime.getTimeInterval()
                         Commond.setUserDefaults(userData, key: "userData")
                         self.dismissViewControllerAnimated(true, completion: self.callBack)
                     }else{
                         UtilTool.noticError(view: self.view, msg: loginData!.responseMsg!)
+                        Commond.removeUserDefaults("userData")
                     }
                     
                     }, failure: { (error) -> Void in
                         button.enabled  = true
                         button.setTitle("登录", forState: UIControlState.Normal)
                         UtilTool.noticError(view: self.view, msg: error.msg!)
+                        Commond.removeUserDefaults("userData")
                 })
             }else{
                 UtilTool.noticError(view: self.view, msg: error)
@@ -182,6 +185,25 @@ class UCLoginViewController: BaseViewController {
             let registerVc          = UCRegisterViewController()
             self.navigationController?.pushViewController(registerVc, animated: true)
         }
+    }
+    
+    class func autoLoginWithUserData(userData : UCUserData , succ : (() -> Void)? , failure : (() -> Void)?) {
+        UCService.loginActionWithUsername(userData.loginName, loginPassword: userData.password, completion: { (loginData) -> Void in
+            if loginData?.cjxnfsCode == 10000 {
+                let uData        = loginData as! UCUserData
+                uData.password   = userData.password
+                uData.timeStamp  = UtilDateTime.getTimeInterval()
+                Commond.setUserDefaults(uData, key: "userData")
+                succ?()
+            }else{
+                Commond.removeUserDefaults("userData")
+                failure?()
+            }
+            
+            }, failure: { (error) -> Void in
+                Commond.removeUserDefaults("userData")
+                failure?()
+        })
     }
 
 }

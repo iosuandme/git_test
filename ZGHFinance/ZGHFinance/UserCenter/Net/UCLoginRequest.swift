@@ -30,7 +30,7 @@ class UCLoginRequest: BaseRequest {
     }
     
     override func needUnifiableLoading() -> Bool {
-        return true
+        return false
     }
     
     override func decodeJsonRequestData(responseDic: Dictionary<String, AnyObject>) -> BaseData {

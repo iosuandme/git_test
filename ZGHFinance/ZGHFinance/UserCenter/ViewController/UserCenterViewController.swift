@@ -18,6 +18,21 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     private var loverCoin       : UILabel!
     private var useableAmount   : UILabel!
     private var totalProfit     : UILabel!
+    private var userInfo        : UCUserInfoData? {
+        didSet{
+            if userInfo != nil {
+                showUserInfo()
+            }
+        }
+    }
+    private var accountInfo     : UCAccountInfoData? {
+        didSet{
+            if accountInfo != nil {
+                showAccountInfo()
+            }
+        }
+    }
+    
     
     private let options = [["icon" : "uc_bankcard" , "title" : "我的银行卡"] , ["icon" : "uc_info" , "title" : "账户安全"] , ["icon" : "uc_software" , "title" : "更多信息"]]
     
@@ -29,6 +44,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UtilTool.addTabBarToController(self)
+        refreshData()
     }
     
     override func initUI() {
@@ -81,7 +97,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         nameLabel                       = UILabel()
         nameLabel.font                  = UIFont.systemFontOfSize(14)
         nameLabel.textColor             = UtilTool.colorWithHexString("#666")
-        nameLabel.text                  = "测试号"
+        nameLabel.text                  = "--"
         topView.addSubview(nameLabel)
         nameLabel.mas_makeConstraints { (maker) in
             maker.left.equalTo()(avatar.mas_right).offset()(60)
@@ -103,8 +119,9 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         realName                        = BaseButton()
         realName.contentHorizontalAlignment = .Left
         realName.titleLabel?.font       = UIFont.systemFontOfSize(12)
-        realName.setTitle("未认证", forState: UIControlState.Normal)
-        realName.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        realName.userInteractionEnabled = false
+        realName.setTitle("--", forState: UIControlState.Normal)
+        realName.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
         realName.addTarget(self, action: #selector(UserCenterViewController.realNameVerify), forControlEvents: UIControlEvents.TouchUpInside)
         topView.addSubview(realName)
         realName.mas_makeConstraints { (maker) in
@@ -128,7 +145,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         phoneLabel                      = UILabel()
         phoneLabel.font                 = UIFont.systemFontOfSize(12)
         phoneLabel.textColor            = UtilTool.colorWithHexString("#666")
-        phoneLabel.text                 = "158****4759"
+        phoneLabel.text                 = "--"
         topView.addSubview(phoneLabel)
         phoneLabel.mas_makeConstraints { (maker) in
             maker.left.equalTo()(self.realName)
@@ -175,7 +192,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         accountAmount                   = UILabel()
         accountAmount.font              = UIFont.systemFontOfSize(14)
         accountAmount.textColor         = UtilTool.colorWithHexString("#ff6600")
-        accountAmount.text              = "0"
+        accountAmount.text              = "--"
         bottomView.addSubview(accountAmount)
         accountAmount.mas_makeConstraints { (maker) in
             maker.left.equalTo()(accountHint)
@@ -197,7 +214,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         loverCoin                       = UILabel()
         loverCoin.font                  = UIFont.systemFontOfSize(14)
         loverCoin.textColor             = UtilTool.colorWithHexString("#ff6600")
-        loverCoin.text                  = "0"
+        loverCoin.text                  = "--"
         bottomView.addSubview(loverCoin)
         loverCoin.mas_makeConstraints { (maker) in
             maker.left.equalTo()(loverHint)
@@ -229,7 +246,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         useableAmount                   = UILabel()
         useableAmount.font              = UIFont.systemFontOfSize(14)
         useableAmount.textColor         = UtilTool.colorWithHexString("#ff6600")
-        useableAmount.text              = "0"
+        useableAmount.text              = "--"
         bottomView.addSubview(useableAmount)
         useableAmount.mas_makeConstraints { (maker) in
             maker.left.equalTo()(leftHint)
@@ -251,7 +268,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         totalProfit                     = UILabel()
         totalProfit.font                = UIFont.systemFontOfSize(14)
         totalProfit.textColor           = UtilTool.colorWithHexString("#ff6600")
-        totalProfit.text                = "0"
+        totalProfit.text                = "--"
         bottomView.addSubview(totalProfit)
         totalProfit.mas_makeConstraints { (maker) in
             maker.left.equalTo()(profitHint)
@@ -264,21 +281,102 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     
     //MARK: SELS
     
+    private func showUserInfo() {
+        nameLabel.text          = userInfo?.username
+        if !userInfo!.idCard.isEmpty {
+            realName.setTitle(userInfo?.realname, forState: UIControlState.Normal)
+            realName.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
+            realName.userInteractionEnabled = false
+        }else{
+            realName.setTitle("未认证", forState: UIControlState.Normal)
+            realName.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+            realName.userInteractionEnabled = true
+        }
+        phoneLabel.text         = UtilTool.encryMobileMiddle(userInfo!.cellPhone)
+        loverCoin.text          = "\(userInfo!.loveCoins)"
+    }
+    
+    private func showAccountInfo() {
+        
+        accountAmount.text      = accountInfo!.financialFund.formatDecimal(true)
+        useableAmount.text      = (accountInfo!.balance - accountInfo!.frozenFund).formatDecimal(true)
+        totalProfit.text        = accountInfo!.countEarnings.formatDecimal(true)
+    }
+    
     @objc private func rechargeAction() {
-        print("充值")
+        if !UtilCheck.isLogin() {
+            let loginVc         = UCLoginViewController()
+            loginVc.callBack    = {Void in
+                print("去充值")
+            }
+            self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+        }
     }
     
     @objc private func realNameVerify() {
-        print("认证")
+        if UtilCheck.isLogin() {
+            
+        }
     }
     
     @objc private func tapAction() {
-        print("头像")
+        if !UtilCheck.isLogin() {
+            let loginVc         = UCLoginViewController()
+            loginVc.callBack    = {Void in
+                print("头像登录")
+            }
+            self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+        }
     }
     
     override func needSetBackIcon() -> Bool {
         return false
     }
+    
+    override func needRefrshData() -> Bool {
+        return false
+    }
+    
+    override func refreshData() {
+        if UtilCheck.isLogin() {
+            if let uData = Commond.getUserDefaults("userData") as? UCUserData {
+                
+                UCService.getUserDataWithToken(uData.loginToken, completion: { (userData) in
+                    if userData?.cjxnfsCode == 10000 {
+                        self.userInfo       = userData as? UCUserInfoData
+                    }else{
+                        UtilTool.noticError(view: self.view, msg: userData!.responseMsg!)
+                    }
+                    }, failure: { (error) in
+                        UtilTool.noticError(view: self.view, msg: error.msg!)
+                })
+                
+                UCService.getAccountDataWithToken(uData.loginToken, completion: { (accountData) in
+                    if accountData?.cjxnfsCode == 10000 {
+                        self.accountInfo    = accountData as? UCAccountInfoData
+                    }else{
+                        UtilTool.noticError(view: self.view, msg: accountData!.responseMsg!)
+                    }
+                    }, failure: { (error) in
+                        UtilTool.noticError(view: self.view, msg: error.msg!)
+                })
+                
+                
+            }
+        }else{
+            nameLabel.text      = "未登录"
+            realName.setTitle("--", forState: UIControlState.Normal)
+            realName.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
+            realName.userInteractionEnabled = false
+            phoneLabel.text     = "--"
+            accountAmount.text  = "0"
+            loverCoin.text      = "0"
+            useableAmount.text  = "0"
+            totalProfit.text    = "0"
+        }
+    }
+    
+    //MARK: DATASOURCE & DELEGATE
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
@@ -308,6 +406,35 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 44
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.row {
+        case 0 :
+            if UtilCheck.isLogin() {
+                print("银行卡")
+            }else{
+                let loginVc         = UCLoginViewController()
+                loginVc.callBack    = {Void in
+                    print("银行卡")
+                }
+                self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+            }
+        case 1 :
+            if UtilCheck.isLogin() {
+                print("实名认证")
+            }else{
+                let loginVc         = UCLoginViewController()
+                loginVc.callBack    = {Void in
+                    print("实名认证")
+                }
+                self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+            }
+        case 2 :
+            print("更多信息")
+        default :
+            break
+        }
     }
     
 }

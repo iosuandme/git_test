@@ -135,8 +135,14 @@ class UtilCheck {
     class func isLogin() -> Bool {
         //let web_qtstr = UtilCookie.getCookieByKey("web_qtstr")
         //return !web_qtstr.isEmpty
-        if let _ = Commond.getUserDefaults("userData") as? UCUserData {
-            return true
+        if let uData = Commond.getUserDefaults("userData") as? UCUserData {
+            let timeStamp   = UtilDateTime.getTimeInterval()
+            let timeAgo     = timeStamp - uData.timeStamp - 10 * 60
+            if uData.timeStamp < timeStamp && timeAgo < 0 {
+                return true
+            }else{
+                return false
+            }
         }else{
             return false
         }
