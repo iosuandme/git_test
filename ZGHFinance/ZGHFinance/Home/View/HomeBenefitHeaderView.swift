@@ -99,7 +99,7 @@ class HomeBenefitHeaderView: UIView {
         buyButton.layer.masksToBounds   = true
         buyButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         buyButton.titleLabel?.font      = UIFont.systemFontOfSize(14)
-        buyButton.addTarget(self, action: "buyAction", forControlEvents: UIControlEvents.TouchUpInside)
+        buyButton.addTarget(self, action: #selector(HomeBenefitHeaderView.buyAction), forControlEvents: UIControlEvents.TouchUpInside)
         
         let topLine                     = UIView()
         topLine.backgroundColor         = UtilTool.colorWithHexString("#ddd")

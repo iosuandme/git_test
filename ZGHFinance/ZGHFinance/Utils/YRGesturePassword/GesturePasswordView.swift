@@ -125,7 +125,7 @@ class GesturePasswordView: UIView , GestureDrawViewDelegate {
             actionBtn.contentMode       = .Right
             actionBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             actionBtn.titleLabel?.font  = UIFont.systemFontOfSize(12)
-            actionBtn.addTarget(self, action: "buttonAction", forControlEvents: UIControlEvents.TouchUpInside)
+            actionBtn.addTarget(self, action: #selector(GesturePasswordView.buttonAction), forControlEvents: UIControlEvents.TouchUpInside)
             self.addSubview(actionBtn)
         }
         showTips()
@@ -195,7 +195,7 @@ class GesturePasswordView: UIView , GestureDrawViewDelegate {
                 GestureKeychain.deleteObject(userKey)
             }
         }else{
-            maxTimes--
+            maxTimes -= 1
             if maxTimes == 0 {
                 delegate?.gesturePasswordForgot(self)
                 GestureKeychain.deleteObject(userKey)

@@ -38,8 +38,8 @@ class SelectedSegmentedBar: UIView {
         self.backgroundColor = UIColor.whiteColor()
         let btnW = frame.size.width / CGFloat(items.count)
         let btnH = frame.size.height - 2
-        for var i = 0 ; i < items.count ; ++i{
-            
+        for i in 0 ..< items.count {
+           
             let btn = BaseButton(frame: CGRect(x: CGFloat(i) * btnW, y: 0, width: btnW, height: btnH))
             btn.tag = i
             btn.setTitle(items[i] as? String, forState: UIControlState.Normal)
@@ -49,7 +49,7 @@ class SelectedSegmentedBar: UIView {
                 btn.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
                 lastBtn = btn
             }
-            btn.addTarget(self, action: "selectedItem:", forControlEvents: UIControlEvents.TouchUpInside)
+            btn.addTarget(self, action: #selector(SelectedSegmentedBar.selectedItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             self.addSubview(btn)
         }
         

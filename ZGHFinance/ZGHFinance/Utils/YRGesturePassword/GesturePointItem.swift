@@ -69,7 +69,7 @@ class GesturePointItem: UIView {
     init(frame: CGRect , delegate : GesturePointItemDelegate) {
         super.init(frame: frame)
         self.delegate   = delegate
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "cancelSelected", name: CANCEL_SELECTED_NOTIFICATION, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GesturePointItem.cancelSelected), name: CANCEL_SELECTED_NOTIFICATION, object: nil)
         initUI()
     }
     
@@ -95,7 +95,7 @@ class GesturePointItem: UIView {
             self.backgroundColor            = selectedColor
             centerCircle?.backgroundColor   = centerColor
             delegate?.gesturePointItemSelected(self, tag: self.tag)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "errorSelected", name: HIGHLIGHT_SELECTED_NOTIFICATION, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GesturePointItem.errorSelected), name: HIGHLIGHT_SELECTED_NOTIFICATION, object: nil)
         }
     }
     

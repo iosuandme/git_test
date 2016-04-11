@@ -22,7 +22,7 @@ class YRPageItem: BaseButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.addTarget(self, action: "touchAction", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addTarget(self, action: #selector(YRPageItem.touchAction), forControlEvents: UIControlEvents.TouchUpInside)
         
     }
     

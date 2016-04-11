@@ -64,7 +64,7 @@ class HomeRollImageView: UIView , UIScrollViewDelegate {
         
         scrollView.contentSize                    = CGSizeMake(CGFloat(images.count + 1) * SCREEN_WIDTH, 0)
         var tmpView : UIView!
-        for var i = 0 ; i < images.count ; ++i {
+        for i in 0 ..< images.count {
             let img = UIImageView()
             if images[i].count == 1 {
                 img.image               = UIImage(named: images[i]["imgName"] + "")
@@ -73,7 +73,7 @@ class HomeRollImageView: UIView , UIScrollViewDelegate {
             }
             let btn = BaseButton()
             btn.tag = i
-            btn.addTarget(self, action: "touchImage:", forControlEvents: UIControlEvents.TouchUpInside)
+            btn.addTarget(self, action: #selector(HomeRollImageView.nextImage(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             scrollView.addSubview(img)
             scrollView.addSubview(btn)
             if tmpView != nil {
@@ -107,7 +107,7 @@ class HomeRollImageView: UIView , UIScrollViewDelegate {
         }
         let btn                     = BaseButton()
         btn.tag                     = images.count
-        btn.addTarget(self, action: "touchImage:", forControlEvents: UIControlEvents.TouchUpInside)
+        btn.addTarget(self, action: #selector(HomeRollImageView.touchImage(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         scrollView.addSubview(img)
         scrollView.addSubview(btn)
         img.mas_makeConstraints({ (maker) -> Void in
@@ -181,7 +181,7 @@ class HomeRollImageView: UIView , UIScrollViewDelegate {
     func addTimer(){
         
         if timer == nil {
-            timer = NSTimer(timeInterval: 5, target: self, selector: "nextImage:", userInfo: nil, repeats: true)
+            timer = NSTimer(timeInterval: 5, target: self, selector: #selector(HomeRollImageView.nextImage(_:)), userInfo: nil, repeats: true)
         }
         
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
@@ -196,7 +196,7 @@ class HomeRollImageView: UIView , UIScrollViewDelegate {
     
     func nextImage(sender:AnyObject!){
         var page = self.pageControl.currentPage
-        ++page
+        page += 1
         let x = CGFloat(page) * scrollView.frame.size.width
         
         UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in

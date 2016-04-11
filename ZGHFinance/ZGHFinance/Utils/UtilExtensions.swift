@@ -148,7 +148,7 @@ extension String {
             
             range = nsStr.rangeOfString(subStr)
             if range.length > 0 {
-                count++
+                count += 1
                 subString = nsStr.substringFromIndex(range.location + range.length)
                 nsStr     = subString as NSString
             }else{

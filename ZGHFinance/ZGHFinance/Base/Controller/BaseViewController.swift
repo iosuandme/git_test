@@ -14,8 +14,8 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     {
         super.viewDidLoad()
         if needKeyBoardObserver() {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardWillShowNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardWillHideNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseViewController.keyboardDidShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseViewController.keyboardDidHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
         }
         
         self.initData()
@@ -160,7 +160,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 18))
         btn.setImage(UIImage(named: "navi_backBar"), forState: UIControlState.Normal)
         btn.imageEdgeInsets = UIEdgeInsets(top: 3, left: -30, bottom: 0, right: 0)
-        btn.addTarget(self, action: "popAction", forControlEvents: UIControlEvents.TouchUpInside)
+        btn.addTarget(self, action: #selector(BaseViewController.popAction), forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(customView: btn)
     }
     

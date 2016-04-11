@@ -73,7 +73,7 @@ class BottomTabBar: UIView
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "toggleCall:", name: UIApplicationWillChangeStatusBarFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BottomTabBar.toggleCall(_:)), name: UIApplicationWillChangeStatusBarFrameNotification, object: nil)
         self.backgroundColor        = UIColor.clearColor()
         let btn_W   = frame.size.width / 3
         let btn_H   = frame.size.height - 5

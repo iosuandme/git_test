@@ -86,7 +86,7 @@ class UCRegisterViewController: BaseViewController , UCInputViewDelegate {
         registerBtn.titleLabel?.font    = UIFont.systemFontOfSize(14)
         registerBtn.setTitle("注册", forState: UIControlState.Normal)
         registerBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        registerBtn.addTarget(self, action: "buttonTapAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        registerBtn.addTarget(self, action: #selector(UCRegisterViewController.buttonTapAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         scrollView.addSubview(optionView)
         scrollView.addSubview(registerBtn)
@@ -193,7 +193,7 @@ class UCRegisterViewController: BaseViewController , UCInputViewDelegate {
     }
     
     @objc private func timeCount(timer : NSTimer) {
-        tInterval--
+        tInterval -= 1
         let button          = timer.userInfo as! UIButton
         if tInterval == 0 {
             button.setTitle("重发验证码", forState: UIControlState.Normal)
@@ -254,7 +254,7 @@ class UCRegisterViewController: BaseViewController , UCInputViewDelegate {
             })
             actionButton.setTitle("\(tInterval)秒后重发", forState: UIControlState.Normal)
             actionButton.enabled    = false
-            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeCount:", userInfo: actionButton, repeats: true)
+            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(UCRegisterViewController.timeCount(_:)), userInfo: actionButton, repeats: true)
         }
     }
     

@@ -45,7 +45,7 @@ class GestureDrawView: UIView , GesturePointItemDelegate {
     
     private func initUI() {
         
-        let gr              = UIPanGestureRecognizer(target: self, action: "panAction:")
+        let gr              = UIPanGestureRecognizer(target: self, action: #selector(GestureDrawView.panAction(_:)))
         self.addGestureRecognizer(gr)
         for i in 0 ... 8 {
             let item        = GesturePointItem(frame: CGRect(x: CGFloat(i % 3) * (itemWidth + space), y: CGFloat(i / 3) * (itemWidth + space), width: itemWidth, height: itemWidth), delegate: self)

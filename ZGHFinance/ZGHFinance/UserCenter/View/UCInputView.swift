@@ -88,7 +88,7 @@ class UCInputView: UIView , UCInputViewDelegate {
         textField.font              = font
         textField.textColor         = textColor
         textField.keyboardType      = keyboardType
-        textField.addTarget(self, action: "didChanged:", forControlEvents: UIControlEvents.EditingChanged)
+        textField.addTarget(self, action: #selector(UCInputView.didChanged(_:)), forControlEvents: UIControlEvents.EditingChanged)
         self.addSubview(textField)
         
         if type == .WithButton {
@@ -99,7 +99,7 @@ class UCInputView: UIView , UCInputViewDelegate {
             button?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             button?.layer.cornerRadius  = 4
             button?.layer.masksToBounds = true
-            button?.addTarget(self, action: "buttonTap:", forControlEvents: UIControlEvents.TouchUpInside)
+            button?.addTarget(self, action: #selector(UCInputView.buttonTap(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             self.addSubview(button!)
         }
         

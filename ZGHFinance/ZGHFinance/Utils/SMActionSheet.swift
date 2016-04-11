@@ -264,7 +264,7 @@ class SMActionSheet: UIView {
                 btn.setTitle(_titleImages![i]["title"] as? String, forState: UIControlState.Normal)
                 btn.setImage(_titleImages![i]["image"] as? UIImage, forState: UIControlState.Normal)
                 btn.backgroundColor = bgColor
-                btn.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(SMActionSheet.buttonClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 btn.tag = i
                 btn.layer.cornerRadius  = 5
                 btn.layer.masksToBounds = true
@@ -292,7 +292,7 @@ class SMActionSheet: UIView {
                 btn.setTitle(_titleImages![i]["title"] as? String, forState: UIControlState.Normal)
                 btn.setImage(_titleImages![i]["image"] as? UIImage, forState: UIControlState.Normal)
                 btn.backgroundColor  = bgColor
-                btn.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(SMActionSheet.buttonClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 btn.tag              = i + index
                 if _titleImages![i]["title"] != nil && _titleImages![i]["image"] is UIImage {
                     btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)

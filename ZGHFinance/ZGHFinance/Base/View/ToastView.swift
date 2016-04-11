@@ -8,8 +8,6 @@
 
 import UIKit
 
-let REQ_CANCEL                  = Selector("requestCanceled")
-
 class ToastView: UIView
 {
     private var bgView          : UIImageView!
@@ -228,12 +226,12 @@ class ToastView: UIView
      
         if withTarget == nil
         {
-            self.cancelBtn.addTarget(self, action: Selector("onDurationArrived"), forControlEvents: UIControlEvents.TouchUpInside)
+            self.cancelBtn.addTarget(self, action: #selector(ToastView.onDurationArrived), forControlEvents: UIControlEvents.TouchUpInside)
         }else
         {
             if andAction == nil
             {
-                self.cancelBtn.addTarget(self, action: Selector("onDurationArrived"), forControlEvents: UIControlEvents.TouchUpInside)
+                self.cancelBtn.addTarget(self, action: #selector(ToastView.onDurationArrived), forControlEvents: UIControlEvents.TouchUpInside)
             }else
             {
                 self.cancelBtn.addTarget(withTarget, action: andAction!, forControlEvents: UIControlEvents.TouchUpInside)
@@ -243,7 +241,7 @@ class ToastView: UIView
         
         if Int(withDuration) != 0
         {
-            NSTimer.scheduledTimerWithTimeInterval(withDuration, target: self, selector: Selector("onDurationArrived"), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(withDuration, target: self, selector: #selector(ToastView.onDurationArrived), userInfo: nil, repeats: false)
         }
     }
     
@@ -261,7 +259,7 @@ class ToastView: UIView
     }
     
     
-    private func onDurationArrived()
+    @objc private func onDurationArrived()
     {
         self.superview?.userInteractionEnabled  = true
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.4 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in

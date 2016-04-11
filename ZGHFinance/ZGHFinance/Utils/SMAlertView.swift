@@ -227,7 +227,7 @@ class SMAlertView: UIView , UITextViewDelegate {
                     btn.tag              = 1
                     btn.titleLabel?.font = UIFont.systemFontOfSize(15)
                 }
-                btn.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(SMAlertView.buttonClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 self.addSubview(btn)
                 btn.mas_makeConstraints({ (maker) -> Void in
                     maker.left.equalTo()(self)
@@ -251,7 +251,7 @@ class SMAlertView: UIView , UITextViewDelegate {
                     }else{
                         btn.tag              = i + 1
                     }
-                    btn.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+                    btn.addTarget(self, action: #selector(SMAlertView.buttonClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     self.addSubview(btn)
                     let width = (SCREEN_WIDTH - 90) / 2
                     btn.mas_makeConstraints({ (maker) -> Void in
@@ -273,8 +273,9 @@ class SMAlertView: UIView , UITextViewDelegate {
                 })
             }else{
                 
-                for var i = _btnArray!.count ; i > 0 ; --i {
+                for j in 0 ..< _btnArray!.count {
                     
+                    let i = _btnArray!.count - j
                     let btn = UIButton()
                     btn.setTitleColor(buttonColor, forState: UIControlState.Normal)
                     btn.setTitle(_btnArray![i-1], forState: UIControlState.Normal)
@@ -287,7 +288,7 @@ class SMAlertView: UIView , UITextViewDelegate {
                     }else{
                         btn.tag              = i
                     }
-                    btn.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+                    btn.addTarget(self, action: #selector(SMAlertView.buttonClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     self.addSubview(btn)
                     btn.mas_makeConstraints({ (maker) -> Void in
                         maker.left.equalTo()(self)

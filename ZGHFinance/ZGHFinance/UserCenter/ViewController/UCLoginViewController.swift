@@ -69,14 +69,14 @@ class UCLoginViewController: BaseViewController {
         loginButton.tag                 = 888
         loginButton.setTitle("登录", forState: UIControlState.Normal)
         loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        loginButton.addTarget(self, action: "buttonTapAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        loginButton.addTarget(self, action: #selector(UCLoginViewController.buttonTapAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         registerBtn                     = BaseButton()
         registerBtn.titleLabel?.font    = UIFont.systemFontOfSize(12)
         registerBtn.tag                 = 999
         registerBtn.setTitle("没有账户？立即注册", forState: UIControlState.Normal)
         registerBtn.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
-        registerBtn.addTarget(self, action: "buttonTapAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        registerBtn.addTarget(self, action: #selector(UCLoginViewController.buttonTapAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         let sepLine                     = UIView()
         sepLine.backgroundColor         = UtilTool.colorWithHexString("#ddd")

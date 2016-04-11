@@ -52,7 +52,7 @@ class ButtonForTab: BaseButton
         self.setImage(self.mImage, forState: UIControlState.Normal)
         self.setTitle(title, forState: UIControlState.Normal)
         self.titleLabel?.font   = UIFont.systemFontOfSize(10)
-        self.addTarget(controller, action: "clickButton:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addTarget(controller, action: #selector(BottomTabBar.clickButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         //let tapGesture = UITapGestureRecognizer(target: controller, action: "doubleClick:")
         //tapGesture.numberOfTapsRequired = 2
         //self.addGestureRecognizer(tapGesture)

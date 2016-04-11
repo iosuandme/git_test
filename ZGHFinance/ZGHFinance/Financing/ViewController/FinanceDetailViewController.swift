@@ -79,7 +79,7 @@ class FinanceDetailViewController: BaseViewController , UITableViewDataSource , 
         })
         
         tableView?.addFooterWithCallback({ () -> Void in
-            blockSelf!.currentPage++
+            blockSelf!.currentPage += 1
             blockSelf!.refreshData()
         })
     }
@@ -124,12 +124,12 @@ class FinanceDetailViewController: BaseViewController , UITableViewDataSource , 
                     self.tableView?.reloadData()
                 }else{
                     UtilTool.noticError(view: self.view, msg: record!.responseMsg!)
-                    self.currentPage--
+                    self.currentPage -= 1
                 }
                 }) { (error) -> Void in
                     self.endRefresh()
                     UtilTool.noticError(view: self.view, msg: error.msg!)
-                    self.currentPage--
+                    self.currentPage -= 1
             }
         }
     }

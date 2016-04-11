@@ -41,7 +41,7 @@ class UtilCheck {
                             break
                         }
                     }
-                    index++
+                    index += 1
                 }
                 return true
             }
@@ -84,7 +84,7 @@ class UtilCheck {
             for char in passwd.characters {
                 let str = String(char)
                 if checkSubChar(str) {
-                    count++
+                    count += 1
                 }
             }
             if count == passwd_length {

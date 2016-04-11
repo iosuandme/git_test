@@ -34,7 +34,7 @@ func toWanString(number:Int, isReal : Bool = true , fen_power : Double = 100) ->
         var count : Int = 0
         for char in intStr.characters {
             trunStr = String(char) + trunStr
-            count++
+            count += 1
         }
         
         var index : Int = 0
@@ -47,7 +47,7 @@ func toWanString(number:Int, isReal : Bool = true , fen_power : Double = 100) ->
         }else{
             for char in trunStr.characters {
                 resStr = String(char) + resStr
-                index++
+                index += 1
                 if index % 3 == 0 {
                     if index < count{
                         resStr = "," + resStr
@@ -78,7 +78,7 @@ func toWanString(number:Int, isReal : Bool = true , fen_power : Double = 100) ->
         var count : Int = 0
         for char in intStr.characters {
             trunStr = String(char) + trunStr
-            count++
+            count += 1
         }
         
         var index : Int = 0
@@ -91,7 +91,7 @@ func toWanString(number:Int, isReal : Bool = true , fen_power : Double = 100) ->
         }else{
             for char in trunStr.characters {
                 resStr = String(char) + resStr
-                index++
+                index += 1
                 if index % 3 == 0 {
                     if index < count{
                         resStr = "," + resStr
@@ -119,7 +119,7 @@ func toWanString(number:Int, isReal : Bool = true , fen_power : Double = 100) ->
         var count : Int = 0
         for char in intStr.characters {
             trunStr = String(char) + trunStr
-            count++
+            count += 1
         }
         
         var index : Int = 0
@@ -132,7 +132,7 @@ func toWanString(number:Int, isReal : Bool = true , fen_power : Double = 100) ->
         }else{
             for char in trunStr.characters {
                 resStr = String(char) + resStr
-                index++
+                index += 1
                 if index % 3 == 0 {
                     if index < count{
                         resStr = "," + resStr
