@@ -431,6 +431,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
                 self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
             }
         case 2 :
+            //登录非登录
             print("更多信息")
         default :
             break
