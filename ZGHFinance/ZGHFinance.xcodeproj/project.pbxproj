@@ -14,6 +14,7 @@
 		6B3C72E31CBBC9730011672E /* UCUserInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E21CBBC9730011672E /* UCUserInfoData.swift */; };
 		6B3C72E51CBBC9840011672E /* UCAccountInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E41CBBC9840011672E /* UCAccountInfoData.swift */; };
 		6B3C72E71CBCD0850011672E /* UCVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E61CBCD0850011672E /* UCVerifyViewController.swift */; };
+		6B3C72E91CBF82B40011672E /* UCVerifyIdCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E81CBF82B40011672E /* UCVerifyIdCardView.swift */; };
 		6B46E9481C8E87FF00F7B009 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9341C8E87FF00F7B009 /* BaseNavigationController.swift */; };
 		6B46E9491C8E87FF00F7B009 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9351C8E87FF00F7B009 /* BaseViewController.swift */; };
 		6B46E94A1C8E87FF00F7B009 /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9371C8E87FF00F7B009 /* BaseData.swift */; };
@@ -109,6 +110,7 @@
 		6B3C72E21CBBC9730011672E /* UCUserInfoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCUserInfoData.swift; sourceTree = "<group>"; };
 		6B3C72E41CBBC9840011672E /* UCAccountInfoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCAccountInfoData.swift; sourceTree = "<group>"; };
 		6B3C72E61CBCD0850011672E /* UCVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCVerifyViewController.swift; sourceTree = "<group>"; };
+		6B3C72E81CBF82B40011672E /* UCVerifyIdCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCVerifyIdCardView.swift; sourceTree = "<group>"; };
 		6B46E9311C8E871100F7B009 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		6B46E9341C8E87FF00F7B009 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		6B46E9351C8E87FF00F7B009 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				6B9D6BF71C9A97A4000F6167 /* UCInputView.swift */,
+				6B3C72E81CBF82B40011672E /* UCVerifyIdCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -789,6 +792,7 @@
 				6B46E9BC1C8EC8E100F7B009 /* YRPageCircleItem.swift in Sources */,
 				6B46E9C01C8EC8E100F7B009 /* YRPageRectItem.swift in Sources */,
 				6BA7D39D1C95111800AF2BF6 /* FinanceDetailCellData.swift in Sources */,
+				6B3C72E91CBF82B40011672E /* UCVerifyIdCardView.swift in Sources */,
 				6B46E9531C8E87FF00F7B009 /* BaseNaviBar.swift in Sources */,
 				6B46E96C1C8E899D00F7B009 /* SMActionSheet.swift in Sources */,
 				6BA7D3A11C96637C00AF2BF6 /* FinanceDefine.swift in Sources */,

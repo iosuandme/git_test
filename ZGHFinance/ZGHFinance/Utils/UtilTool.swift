@@ -272,7 +272,7 @@ enum ParseNumberType : Int {
     class func getBankName(name : String , keyForValue : Bool = true) -> String {
         
         var str                     = ""
-        let bankInfo : NSDictionary = ["zhaoshang":"招商银行","gongshang":"工商银行","guangda":"光大银行","guangfa":"广发银行","huaxia":"华夏银行","jianshe":"建设银行","minsheng":"民生银行","nongye":"农业银行","pingan":"平安银行","pufa":"浦发银行","shanghai":"上海银行","xingye":"兴业银行","youzheng":"邮政储蓄","zhongguo":"中国银行","zhongxin":"中信银行"]
+        let bankInfo : NSDictionary = ["CMB":"招商银行","ICBC":"工商银行","CEB":"光大银行","GDB":"广发银行","CCB":"建设银行","CMBC":"民生银行","ABC":"农业银行","SPDB":"浦发银行","CIB":"兴业银行","BOC":"中国银行","CITIC":"中信银行","COMM":"交通银行"]
         if !keyForValue {
             for kv in bankInfo {
                 if kv.value as! String == name {
