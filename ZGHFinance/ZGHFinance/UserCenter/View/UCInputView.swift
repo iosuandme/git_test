@@ -10,6 +10,7 @@ import UIKit
 
 enum UCInputViewType : Int {
     case Normal
+    case Select
     case WithButton
 }
 
@@ -18,6 +19,8 @@ enum UCInputViewType : Int {
     func inputViewDidChanged(inputView : UCInputView , withInputString string : String)
     optional
     func inputViewButtonTap(inputView : UCInputView , actionButton : UIButton)
+    optional
+    func inputViewSelected(inputView : UCInputView , withInputString string : String?)
 }
 
 class UCInputView: UIView , UCInputViewDelegate {
@@ -33,7 +36,20 @@ class UCInputView: UIView , UCInputViewDelegate {
     }
     var iconImage               : UIImage? {
         didSet {
-            icon.image                  = iconImage
+            if iconImage == nil {
+                textField.mas_remakeConstraints({ (maker) in
+                    maker.left.equalTo()(self.icon)
+                    maker.centerY.equalTo()(self.icon)
+                    if self.button == nil {
+                        maker.right.equalTo()(self).offset()(-16)
+                    }else{
+                        maker.right.equalTo()(self.button?.mas_left).offset()(-16)
+                    }
+                    maker.height.equalTo()(self).offset()(-1)
+                })
+            }else{
+                icon.image                  = iconImage
+            }
         }
     }
     var textColor               : UIColor = UtilTool.colorWithHexString("#666") {
@@ -70,6 +86,7 @@ class UCInputView: UIView , UCInputViewDelegate {
     private var icon            : UIImageView!
     private var textField       : UITextField!
     private var button          : BaseButton?
+    private var arrImg          : UIImageView?
     private var sepLine         : UIView?
     private weak var delegate   : UCInputViewDelegate?
     
@@ -101,6 +118,12 @@ class UCInputView: UIView , UCInputViewDelegate {
             button?.layer.masksToBounds = true
             button?.addTarget(self, action: #selector(UCInputView.buttonTap(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             self.addSubview(button!)
+        }else if type == .Select {
+            arrImg                      = UIImageView(image: UIImage(named: "uc_cell_arr"))
+            textField.userInteractionEnabled   = false
+            let tap                     = UITapGestureRecognizer(target: self, action: #selector(UCInputView.tapAction))
+            self.addGestureRecognizer(tap)
+            self.addSubview(arrImg!)
         }
         
         var offset : CGFloat            = 0
@@ -136,6 +159,13 @@ class UCInputView: UIView , UCInputViewDelegate {
             maker.height.equalTo()(self).offset()(offset)
         }
         
+        arrImg?.mas_makeConstraints({ (maker) in
+            maker.right.equalTo()(self).offset()(-16)
+            maker.centerY.equalTo()(self.textField)
+            maker.width.equalTo()(9.5)
+            maker.height.equalTo()(15.5)
+        })
+        
         sepLine?.mas_makeConstraints({ (maker) -> Void in
             maker.left.equalTo()(self)
             maker.right.equalTo()(self)
@@ -143,6 +173,10 @@ class UCInputView: UIView , UCInputViewDelegate {
             maker.height.equalTo()(1)
         })
         
+    }
+    
+    @objc private func tapAction() {
+        delegate?.inputViewSelected?(self, withInputString: self.text)
     }
     
     @objc private func buttonTap(button : UIButton) {

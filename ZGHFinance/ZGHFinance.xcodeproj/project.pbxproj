@@ -13,6 +13,7 @@
 		6B3C72E11CBBAC1B0011672E /* UCGetAccountDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E01CBBAC1B0011672E /* UCGetAccountDataRequest.swift */; };
 		6B3C72E31CBBC9730011672E /* UCUserInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E21CBBC9730011672E /* UCUserInfoData.swift */; };
 		6B3C72E51CBBC9840011672E /* UCAccountInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E41CBBC9840011672E /* UCAccountInfoData.swift */; };
+		6B3C72E71CBCD0850011672E /* UCVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E61CBCD0850011672E /* UCVerifyViewController.swift */; };
 		6B46E9481C8E87FF00F7B009 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9341C8E87FF00F7B009 /* BaseNavigationController.swift */; };
 		6B46E9491C8E87FF00F7B009 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9351C8E87FF00F7B009 /* BaseViewController.swift */; };
 		6B46E94A1C8E87FF00F7B009 /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9371C8E87FF00F7B009 /* BaseData.swift */; };
@@ -107,6 +108,7 @@
 		6B3C72E01CBBAC1B0011672E /* UCGetAccountDataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCGetAccountDataRequest.swift; sourceTree = "<group>"; };
 		6B3C72E21CBBC9730011672E /* UCUserInfoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCUserInfoData.swift; sourceTree = "<group>"; };
 		6B3C72E41CBBC9840011672E /* UCAccountInfoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCAccountInfoData.swift; sourceTree = "<group>"; };
+		6B3C72E61CBCD0850011672E /* UCVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCVerifyViewController.swift; sourceTree = "<group>"; };
 		6B46E9311C8E871100F7B009 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		6B46E9341C8E87FF00F7B009 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		6B46E9351C8E87FF00F7B009 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				6B46E9B21C8E8D2200F7B009 /* UserCenterViewController.swift */,
 				6BDA681F1C98FD4F00D0CBF3 /* UCLoginViewController.swift */,
 				6B9D6BF51C9A5AAE000F6167 /* UCRegisterViewController.swift */,
+				6B3C72E61CBCD0850011672E /* UCVerifyViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				6B46E9751C8E899D00F7B009 /* GestureDrawView.swift in Sources */,
 				6BA447EA1C91248E00703932 /* FinanceDetailHeaderView.swift in Sources */,
 				6B6FC0C31C92C8ED00F15227 /* FinanceRecordCell.swift in Sources */,
+				6B3C72E71CBCD0850011672E /* UCVerifyViewController.swift in Sources */,
 				6BDA68141C97BB4E00D0CBF3 /* HomeBenefitListViewController.swift in Sources */,
 				6B46E9721C8E899D00F7B009 /* UtilExtensions.swift in Sources */,
 				6B46E9991C8E8A8500F7B009 /* ButtonForTab.swift in Sources */,

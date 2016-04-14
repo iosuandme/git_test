@@ -44,6 +44,10 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UtilTool.addTabBarToController(self)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         refreshData()
     }
     
@@ -298,7 +302,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     
     private func showAccountInfo() {
         
-        accountAmount.text      = accountInfo!.financialFund.formatDecimal(true)
+        accountAmount.text      = (accountInfo!.financialFund + accountInfo!.balance).formatDecimal(true)
         useableAmount.text      = (accountInfo!.balance - accountInfo!.frozenFund).formatDecimal(true)
         totalProfit.text        = accountInfo!.countEarnings.formatDecimal(true)
     }
@@ -422,11 +426,13 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
             }
         case 1 :
             if UtilCheck.isLogin() {
-                print("实名认证")
+                let verifyVc        = UCVerifyViewController()
+                self.navigationController?.pushViewController(verifyVc, animated: true)
             }else{
                 let loginVc         = UCLoginViewController()
                 loginVc.callBack    = {Void in
-                    print("实名认证")
+                    let verifyVc        = UCVerifyViewController()
+                    self.navigationController?.pushViewController(verifyVc, animated: true)
                 }
                 self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
             }

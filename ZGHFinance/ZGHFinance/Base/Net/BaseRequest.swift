@@ -261,9 +261,14 @@ class BaseRequest: NSObject
                 
             }else
             {
-                baseData                        = BaseData();
-                baseData?.cjxnfsCode            = 10004
-                baseData?.responseMsg           = "数据异常"
+                baseData                            = BaseData();
+                if let code = Int(responseObject + "") {
+                    baseData?.cjxnfsCode            = code
+                    baseData?.responseMsg           = "请求失败（\(code)）"
+                }else{
+                    baseData?.cjxnfsCode            = 10004
+                    baseData?.responseMsg           = "数据异常"
+                }
             }
             if(self.completionBlock != nil)
             {
