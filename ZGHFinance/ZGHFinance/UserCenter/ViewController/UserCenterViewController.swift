@@ -39,6 +39,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title                  = "我的账户"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserCenterViewController.clearAllInfo), name: "unlogin", object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -368,16 +369,20 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
                 
             }
         }else{
-            nameLabel.text      = "未登录"
-            realName.setTitle("--", forState: UIControlState.Normal)
-            realName.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
-            realName.userInteractionEnabled = false
-            phoneLabel.text     = "--"
-            accountAmount.text  = "0"
-            loverCoin.text      = "0"
-            useableAmount.text  = "0"
-            totalProfit.text    = "0"
+            clearAllInfo()
         }
+    }
+    
+    @objc private func clearAllInfo() {
+        nameLabel.text      = "未登录"
+        realName.setTitle("--", forState: UIControlState.Normal)
+        realName.setTitleColor(UtilTool.colorWithHexString("#666"), forState: UIControlState.Normal)
+        realName.userInteractionEnabled = false
+        phoneLabel.text     = "--"
+        accountAmount.text  = "0"
+        loverCoin.text      = "0"
+        useableAmount.text  = "0"
+        totalProfit.text    = "0"
     }
     
     //MARK: DATASOURCE & DELEGATE
@@ -427,18 +432,23 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         case 1 :
             if UtilCheck.isLogin() {
                 let verifyVc        = UCVerifyViewController()
+                verifyVc.userData   = userInfo
                 self.navigationController?.pushViewController(verifyVc, animated: true)
             }else{
                 let loginVc         = UCLoginViewController()
                 loginVc.callBack    = {Void in
-                    let verifyVc        = UCVerifyViewController()
-                    self.navigationController?.pushViewController(verifyVc, animated: true)
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { 
+                        self.refreshData()
+                    })
+                    
                 }
                 self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
             }
         case 2 :
             //登录非登录,不同的显示
             print("更多信息")
+            UtilCookie.logout()
         default :
             break
         }

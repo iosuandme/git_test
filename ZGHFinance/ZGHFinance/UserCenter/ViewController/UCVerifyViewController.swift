@@ -10,6 +10,8 @@ import UIKit
 
 class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
     
+    var type                    : Int           = 1
+    var userData                : UCUserInfoData?
     private var scrollView      : UIScrollView!
     private var optionView      : UIView!
     private var realName        : UCInputView!
@@ -25,12 +27,46 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title                              = "实名认证"
+        if type == 1 {
+            self.title                          = "实名认证"
+        }else{
+            self.title                          = "绑定银行卡"
+        }
     }
     
     override func initUI() {
         super.initUI()
         
+        if userData != nil {
+            
+            if userData!.realname.isEmpty {
+                verifyUI()
+            }else{
+                
+                if type == 1 {
+                    let idCardView              = UCVerifyIdCardView()
+                    self.view.addSubview(idCardView)
+                    idCardView.mas_makeConstraints({ (maker) in
+                        maker.left.equalTo()(self.view).offset()(16)
+                        maker.right.equalTo()(self.view).offset()(-16)
+                        maker.top.equalTo()(self.view).offset()(30)
+                        maker.height.equalTo()(100)
+                    })
+                    idCardView.name             = userData?.realname
+                    idCardView.id               = UtilTool.idCardFormat(userData!.idCard)
+                }else{
+                    
+                }
+            }
+            
+            
+        }else{
+            UtilTool.noticError(view: self.view, msg: "用户数据获取错误")
+        }
+        
+    }
+    
+    private func verifyUI() {
         scrollView                              = UIScrollView()
         scrollView.contentSize                  = CGSizeMake(self.view.bounds.width, 500)
         scrollView.showsVerticalScrollIndicator = false
@@ -82,6 +118,13 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
         idCard.placeholder                      = "身份证号码"
         idCard.tag                              = 101
         
+        if !userData!.realname.isEmpty {
+            realName.text                       = userData!.realname
+            realName.userInteractionEnabled     = false
+            idCard.text                         = UtilTool.idCardFormat(userData!.idCard)
+            idCard.userInteractionEnabled       = false
+        }
+        
         dealPassword                            = UCInputView(type: .Normal, delegate: self, needLine: true)
         dealPassword.iconImage                  = UIImage(named: "uc_login_lock")
         dealPassword.secureTextEntry            = true
@@ -98,6 +141,7 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
         phoneLabel.iconImage                    = UIImage(named: "uc_login_phone")
         phoneLabel.userInteractionEnabled       = false
         phoneLabel.tag                          = 104
+        phoneLabel.text                         = userData?.cellPhone
         
         bankName                                = UCInputView(type: .Select, delegate: self, needLine: true)
         bankName.iconImage                      = UIImage(named: "uc_bankcard")
@@ -150,8 +194,59 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func refreshData() {
+        
+    }
+    
     @objc private func buttonTapAction(btn : UIButton) {
         
     }
+    
+    @objc private func timeCount(timer : NSTimer) {
+        tInterval -= 1
+        let button          = timer.userInfo as! UIButton
+        if tInterval == 0 {
+            button.setTitle("重发验证码", forState: UIControlState.Normal)
+            button.enabled  = true
+            tInterval       = 60
+            timer.invalidate()
+        }else{
+            button.setTitle("\(tInterval)秒后重发", forState: UIControlState.Normal)
+        }
+        
+    }
+    
+    //MARK: Delegate
+    
+    func inputViewButtonTap(inputView: UCInputView, actionButton: UIButton) {
+        let phone = phoneLabel.text!
+        if phone.isEmpty {
+            UtilTool.noticError(view: self.view, msg: "请输入手机号")
+        }else if !UtilCheck.checkMobile(phone){
+            UtilTool.noticError(view: self.view, msg: "请输入正确手机号")
+        }else{
+            UCService.sendMbCodeWithPhone(phone, completion: { (data) -> Void in
+                }, failure: { (error) -> Void in
+            })
+            actionButton.setTitle("\(tInterval)秒后重发", forState: UIControlState.Normal)
+            actionButton.enabled    = false
+            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(UCVerifyViewController.timeCount(_:)), userInfo: actionButton, repeats: true)
+        }
+    }
+    
+    func inputViewDidChanged(inputView: UCInputView, withInputString string: String) {
+        print(string)
+    }
+    
+    func inputViewSelected(inputView: UCInputView, withInputString string: String?) {
+        print(string)
+    }
+    
+    private var tInterval   : Int               = 60
 
 }

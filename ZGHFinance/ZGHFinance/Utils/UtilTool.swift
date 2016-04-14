@@ -260,12 +260,19 @@ enum ParseNumberType : Int {
         return (UIDevice.currentDevice().systemVersion as NSString).floatValue
     }
     
+    class func idCardFormat(idCard : NSString) -> String {
+        
+        let frontFour = idCard.substringToIndex(4)
+        let backFour = idCard.substringFromIndex(idCard.length - 4)
+        return "\(frontFour)**********\(backFour)"
+    }
+    
     //银行卡号格式，传进银行，卡号 以 "XX银行 1111*** ***1111" 格式输出
     class func bankCardFormat(name : NSString = "", cardNo : NSString) -> String {
         
         let frontFour = cardNo.substringToIndex(4)
         let backFour = cardNo.substringFromIndex(cardNo.length - 4)
-        return (name as String) + " \(frontFour)*** ***\(backFour)"
+        return (name as String) + " \(frontFour) **** **** \(backFour)"
     }
     
     //获得银行名称 或 代码    name可为代码，也可为名称   keyForValue默认通过代码找名称

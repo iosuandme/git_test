@@ -26,7 +26,7 @@ class UtilCookie: NSObject {
     }
     //删除Cookie
     class func logout() {
-        let cookies : Array? = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies
+        /*let cookies : Array? = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies
         
         
         //cookies?.removeAll(keepCapacity: false)
@@ -37,8 +37,10 @@ class UtilCookie: NSObject {
                 NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
             }
         }
+        saveCookie()*/
+        Commond.removeUserDefaults("userData")
         NSNotificationCenter.defaultCenter().postNotificationName("unlogin", object: nil)
-        saveCookie()
+ 
     }
     //保存Cookie
     class func saveCookie() {
