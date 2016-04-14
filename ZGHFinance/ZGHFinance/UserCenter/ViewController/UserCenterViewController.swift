@@ -89,6 +89,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         let avatar                      = UIImageView(image: UIImage(named: "uc_login_icon.jpg"))
         avatar.userInteractionEnabled   = true
         avatar.layer.cornerRadius       = 25
+        avatar.layer.masksToBounds      = true
         let tap                         = UITapGestureRecognizer(target: self, action: #selector(UserCenterViewController.tapAction))
         avatar.addGestureRecognizer(tap)
         headerView.addSubview(avatar)
@@ -160,14 +161,33 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         
         let rechargeBtn                 = BaseButton()
         rechargeBtn.layer.cornerRadius  = 4
+        rechargeBtn.tag                 = 888
         rechargeBtn.titleLabel?.font    = UIFont.systemFontOfSize(14)
         rechargeBtn.backgroundColor     = UtilTool.colorWithHexString("#53a0e3")
         rechargeBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         rechargeBtn.setTitle("充值", forState: UIControlState.Normal)
-        rechargeBtn.addTarget(self, action: #selector(UserCenterViewController.rechargeAction), forControlEvents: UIControlEvents.TouchUpInside)
+        rechargeBtn.addTarget(self, action: #selector(UserCenterViewController.rechargeAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let withdrawBtn                 = BaseButton()
+        withdrawBtn.layer.cornerRadius  = 4
+        rechargeBtn.tag                 = 999
+        withdrawBtn.titleLabel?.font    = UIFont.systemFontOfSize(14)
+        withdrawBtn.backgroundColor     = UtilTool.colorWithHexString("#ff6600")
+        withdrawBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        withdrawBtn.setTitle("提现", forState: UIControlState.Normal)
+        withdrawBtn.addTarget(self, action: #selector(UserCenterViewController.rechargeAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
         headerView.addSubview(rechargeBtn)
+        headerView.addSubview(withdrawBtn)
+        
         rechargeBtn.mas_makeConstraints { (maker) in
             maker.left.equalTo()(headerView).offset()(32)
+            maker.width.equalTo()(withdrawBtn)
+            maker.top.equalTo()(topView.mas_bottom).offset()(16)
+            maker.height.equalTo()(40)
+        }
+        withdrawBtn.mas_makeConstraints { (maker) in
+            maker.left.equalTo()(rechargeBtn.mas_right).offset()(16)
             maker.right.equalTo()(headerView).offset()(-32)
             maker.top.equalTo()(topView.mas_bottom).offset()(16)
             maker.height.equalTo()(40)
@@ -308,7 +328,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         totalProfit.text        = accountInfo!.countEarnings.formatDecimal(true)
     }
     
-    @objc private func rechargeAction() {
+    @objc private func rechargeAction(btn : BaseButton) {
         if !UtilCheck.isLogin() {
             let loginVc         = UCLoginViewController()
             loginVc.callBack    = {Void in
@@ -399,6 +419,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         cell.textLabel?.font        = UIFont.systemFontOfSize(14)
         cell.textLabel?.textColor   = UtilTool.colorWithHexString("#a8a8a9")
         cell.accessoryType          = .DisclosureIndicator
+        cell.selectionStyle         = .None
         if indexPath.row != 2 {
             let sep                 = UIView()
             sep.backgroundColor     = UtilTool.colorWithHexString("#efefef")
