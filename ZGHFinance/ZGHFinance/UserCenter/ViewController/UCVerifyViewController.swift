@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
+class UCVerifyViewController: BaseViewController , UCInputViewDelegate , UCBankPickerViewDelegate {
     
     var type                    : Int           = 1
     var userData                : UCUserInfoData?
@@ -24,6 +24,7 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
     private var localAddr       : UCInputView!
     private var mbCode          : UCInputView!
     private var submitBtn       : BaseButton!
+    private let bankInfo = ["招商银行","工商银行","光大银行","广发银行","建设银行","民生银行","农业银行","浦发银行","兴业银行","中国银行","中信银行","交通银行"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,24 +40,25 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
         
         if userData != nil {
             
-            if userData!.realname.isEmpty {
+            if userData!.idCard.isEmpty || (type != 1 && userData!.bankCard.isEmpty){
                 verifyUI()
             }else{
-                
+                let idCardView              = UCVerifyIdCardView()
+                self.view.addSubview(idCardView)
+                idCardView.mas_makeConstraints({ (maker) in
+                    maker.left.equalTo()(self.view).offset()(16)
+                    maker.right.equalTo()(self.view).offset()(-16)
+                    maker.top.equalTo()(self.view).offset()(30)
+                    maker.height.equalTo()(100)
+                })
+                var info : CardInfo?
                 if type == 1 {
-                    let idCardView              = UCVerifyIdCardView()
-                    self.view.addSubview(idCardView)
-                    idCardView.mas_makeConstraints({ (maker) in
-                        maker.left.equalTo()(self.view).offset()(16)
-                        maker.right.equalTo()(self.view).offset()(-16)
-                        maker.top.equalTo()(self.view).offset()(30)
-                        maker.height.equalTo()(100)
-                    })
-                    idCardView.name             = userData?.realname
-                    idCardView.id               = UtilTool.idCardFormat(userData!.idCard)
-                }else{
+                    info                    = CardInfo(icon: UIImage(named: "uc_login_icon.jpg"), name: userData?.realname, id: userData!.idCard, status: "已认证")
                     
+                }else{
+                    info                    = CardInfo(icon: UIImage(named: userData!.bankName), name: UtilTool.getBankName(userData!.bankName), id: UtilTool.bankCardFormat(userData!.bankCard), status: "已绑定")
                 }
+                idCardView.cardInfo         = info
             }
             
             
@@ -70,6 +72,8 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
         scrollView                              = UIScrollView()
         scrollView.contentSize                  = CGSizeMake(self.view.bounds.width, 500)
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.alwaysBounceVertical         = true
+        scrollView.keyboardDismissMode          = .OnDrag
         self.view.addSubview(scrollView)
         scrollView.mas_makeConstraints { (maker) in
             maker.left.equalTo()(self.view)
@@ -118,7 +122,7 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
         idCard.placeholder                      = "身份证号码"
         idCard.tag                              = 101
         
-        if !userData!.realname.isEmpty {
+        if !userData!.idCard.isEmpty {
             realName.text                       = userData!.realname
             realName.userInteractionEnabled     = false
             idCard.text                         = UtilTool.idCardFormat(userData!.idCard)
@@ -199,12 +203,96 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
         
     }
     
-    override func refreshData() {
-        
-    }
-    
     @objc private func buttonTapAction(btn : UIButton) {
         
+        self.view.endEditing(true)
+        var error           = ""
+        if realName.text!.isEmpty {
+            error           = "请填写真实姓名"
+            realName.becomeFirstResponder()
+        }else if idCard.text!.isEmpty {
+            error           = "请填写身份证号"
+            idCard.becomeFirstResponder()
+        }else if dealPassword.text!.isEmpty {
+            error           = "请填写交易密码"
+            dealPassword.becomeFirstResponder()
+        }else if reDealPassword.text!.isEmpty {
+            error           = "请重复交易密码"
+            reDealPassword.becomeFirstResponder()
+        }else if phoneLabel.text!.isEmpty {
+            error           = "手机号码不能为空"
+        }else if bankName.text!.isEmpty || bankName.text! == "请选择银行" {
+            error           = "请选择银行"
+        }else if bankCard.text!.isEmpty {
+            error           = "请填写银行卡号"
+            bankCard.becomeFirstResponder()
+        }else if localAddr.text!.isEmpty {
+            error           = "请填写银行卡开户地"
+            localAddr.becomeFirstResponder()
+        }else if mbCode.text!.isEmpty {
+            error           = "请填写验证码"
+            mbCode.becomeFirstResponder()
+        }else if userData!.idCard.isEmpty && !checkIdCard(idCard.text!) {
+            error           = "身份证号不正确"
+            idCard.becomeFirstResponder()
+        }else if dealPassword.text! != reDealPassword.text! {
+            error           = "两次交易密码不同"
+            dealPassword.becomeFirstResponder()
+        }
+        
+        if error.isEmpty {
+            if let userInfo = Commond.getUserDefaults("userData") as? UCUserData {
+                UCService.verifyAuthInfo([
+                    "token" : userInfo.loginToken ,
+                    "realname" : realName.text! ,
+                    "idCard" : userData!.idCard.isEmpty ? idCard.text! : userData!.idCard ,
+                    "phone" : phoneLabel.text! ,
+                    "checkCode" : mbCode.text! ,
+                    "tradePassword" : dealPassword.text! ,
+                    "bankCardNo" : bankCard.text! ,
+                    "pcId" : UtilTool.getBankName(bankName.text!, keyForValue: false) ,
+                    "bankLocation" : localAddr.text!], completion: { (data) in
+                        if let str = data?.responseData as? String {
+                            if str.hasPrefix("uid") {
+                                UtilTool.noticError(view: self.view, msg: "认证成功", offset: 0, time: 0.5, complete: {
+                                    self.navigationController?.popViewControllerAnimated(true)
+                                })
+                            }else{
+                                UtilTool.noticError(view: self.view, msg: "认证失败(\(str))")
+                            }
+                        }else{
+                            UtilTool.noticError(view: self.view, msg: "信息有误，认证失败")
+                        }
+                    }, failure: { (error) in
+                        UtilTool.noticError(view: self.view, msg: error.msg!)
+                })
+            }else{
+                let _ = UCLoginViewController()
+                self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+            }
+        }else{
+            UtilTool.noticError(view: self.view, msg: error)
+        }
+    }
+    
+    private func checkIdCard(id : String) -> Bool {
+        if id.length() != 18 {
+            return false
+        }else{
+            let subPreString = (id as NSString).substringToIndex(id.length() - 1)
+            let subSufString = (id as NSString).substringFromIndex(id.length() - 1)
+            if let _ = Int(subPreString) {
+                if let _ = Int(subSufString) {
+                    return true
+                }else if subSufString == "x" || subSufString == "X" {
+                    return true
+                }else{
+                    return false
+                }
+            }else{
+                return false
+            }
+        }
     }
     
     @objc private func timeCount(timer : NSTimer) {
@@ -219,6 +307,15 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
             button.setTitle("\(tInterval)秒后重发", forState: UIControlState.Normal)
         }
         
+    }
+    
+    override func needKeyBoardObserver() -> Bool {
+        return true
+    }
+    
+    private weak var tmpCompareView : UCInputView?
+    override func observerOptions() -> (transView: UIView?, compareView: UIView?) {
+        return (scrollView , tmpCompareView)
     }
     
     //MARK: Delegate
@@ -240,11 +337,25 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate {
     }
     
     func inputViewDidChanged(inputView: UCInputView, withInputString string: String) {
-        print(string)
     }
     
     func inputViewSelected(inputView: UCInputView, withInputString string: String?) {
-        print(string)
+        self.view.endEditing(true)
+        let picker                  = UCBankPickerView()
+        picker.delegate             = self
+        picker.dataSource           = bankInfo
+        if let index = bankInfo.indexOf(bankName.text!) {
+            picker.selectedIndex    = index
+        }
+        picker.showInView(self.view)
+    }
+    
+    func inputViewStartEditing(inputView: UCInputView) {
+        tmpCompareView      = inputView
+    }
+    
+    func pickerViewDidSelectedWithName(name: String) {
+        bankName.text       = name
     }
     
     private var tInterval   : Int               = 60

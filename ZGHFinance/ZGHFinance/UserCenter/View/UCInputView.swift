@@ -16,6 +16,8 @@ enum UCInputViewType : Int {
 
 @objc protocol UCInputViewDelegate : NSObjectProtocol {
     optional
+    func inputViewStartEditing(inputView : UCInputView)
+    optional
     func inputViewDidChanged(inputView : UCInputView , withInputString string : String)
     optional
     func inputViewButtonTap(inputView : UCInputView , actionButton : UIButton)
@@ -23,7 +25,7 @@ enum UCInputViewType : Int {
     func inputViewSelected(inputView : UCInputView , withInputString string : String?)
 }
 
-class UCInputView: UIView , UCInputViewDelegate {
+class UCInputView: UIView , UITextFieldDelegate {
     
     var text                    : String? {
         get {
@@ -100,6 +102,7 @@ class UCInputView: UIView , UCInputViewDelegate {
         self.addSubview(icon)
         
         textField                   = UITextField()
+        textField.delegate          = self
         textField.placeholder       = placeholder
         textField.secureTextEntry   = secureTextEntry
         textField.font              = font
@@ -189,6 +192,10 @@ class UCInputView: UIView , UCInputViewDelegate {
     
     override func becomeFirstResponder() -> Bool {
         return textField.becomeFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        delegate?.inputViewStartEditing?(self)
     }
 
     required init?(coder aDecoder: NSCoder) {

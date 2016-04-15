@@ -87,6 +87,10 @@ class BaseRequest: NSObject
         return true
     }
     
+    func needOriginData() -> Bool {
+        return false
+    }
+    
     func decodeJsonRequestData(responseDic : Dictionary<String,AnyObject>) -> BaseData
     {
         let baseData : BaseData         = BaseData()
@@ -261,13 +265,19 @@ class BaseRequest: NSObject
                 
             }else
             {
-                baseData                            = BaseData();
-                if let code = Int(responseObject + "") {
-                    baseData?.cjxnfsCode            = code
-                    baseData?.responseMsg           = "请求失败（\(code)）"
-                }else{
-                    baseData?.cjxnfsCode            = 10004
+                baseData                            = BaseData()
+                if responseObject is NSData {
+                    baseData?.responseData          = NSString(data: responseObject as! NSData, encoding: NSUTF8StringEncoding)
                     baseData?.responseMsg           = "数据异常"
+                }else{
+                    baseData?.responseData              = responseObject
+                    if let code = Int(responseObject + "") {
+                        baseData?.cjxnfsCode            = code
+                        baseData?.responseMsg           = "请求失败（\(code)）"
+                    }else{
+                        baseData?.cjxnfsCode            = 10004
+                        baseData?.responseMsg           = "数据异常"
+                    }
                 }
             }
             if(self.completionBlock != nil)
@@ -317,8 +327,13 @@ class BaseRequest: NSObject
         {
             self.requestParamDic = Dictionary<String,AnyObject>()
         }
-        
-        requestManager.requestSerializer.timeoutInterval        = timeout
+        requestManager.requestSerializer.timeoutInterval            = timeout
+        if needOriginData() {
+            requestManager.responseSerializer                       = AFCompoundResponseSerializer()
+        }else{
+            requestManager.responseSerializer                       = QCGHTTPRequestOperationManager.keepResponseSerializer!
+        }
+        requestManager.responseSerializer.acceptableContentTypes    = NSSet(array: ["application/json", "text/json", "text/javascript" , "text/plain","text/html"]) as Set<NSObject>
         if httpHeader != nil {
             for (key , value) in httpHeader! {
                 requestManager.requestSerializer.setValue(value, forHTTPHeaderField: key)

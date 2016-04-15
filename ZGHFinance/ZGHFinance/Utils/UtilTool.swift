@@ -268,11 +268,11 @@ enum ParseNumberType : Int {
     }
     
     //银行卡号格式，传进银行，卡号 以 "XX银行 1111*** ***1111" 格式输出
-    class func bankCardFormat(name : NSString = "", cardNo : NSString) -> String {
+    class func bankCardFormat(cardNo : NSString) -> String {
         
         let frontFour = cardNo.substringToIndex(4)
         let backFour = cardNo.substringFromIndex(cardNo.length - 4)
-        return (name as String) + " \(frontFour) **** **** \(backFour)"
+        return "\(frontFour) **** **** \(backFour)"
     }
     
     //获得银行名称 或 代码    name可为代码，也可为名称   keyForValue默认通过代码找名称

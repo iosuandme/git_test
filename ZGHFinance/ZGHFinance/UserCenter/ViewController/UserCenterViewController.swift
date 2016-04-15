@@ -25,6 +25,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
             }
         }
     }
+    private var bankInfo        : Dictionary<String , AnyObject>?
     private var accountInfo     : UCAccountInfoData? {
         didSet{
             if accountInfo != nil {
@@ -441,23 +442,20 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
         case 0 :
-            if UtilCheck.isLogin() {
-                print("银行卡")
-            }else{
-                let loginVc         = UCLoginViewController()
-                loginVc.callBack    = {Void in
-                    print("银行卡")
-                }
-                self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
-            }
+            fallthrough
         case 1 :
             if UtilCheck.isLogin() {
-                let verifyVc        = UCVerifyViewController()
-                verifyVc.userData   = userInfo
+                let verifyVc            = UCVerifyViewController()
+                verifyVc.type           = indexPath.row
+                if bankInfo != nil {
+                    userInfo?.bankName  = bankInfo!["bankName"] + ""
+                    userInfo?.bankCard  = bankInfo!["bankCard"] + ""
+                }
+                verifyVc.userData       = userInfo
                 self.navigationController?.pushViewController(verifyVc, animated: true)
             }else{
-                let loginVc         = UCLoginViewController()
-                loginVc.callBack    = {Void in
+                let loginVc             = UCLoginViewController()
+                loginVc.callBack        = {Void in
                     
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { 
                         self.refreshData()

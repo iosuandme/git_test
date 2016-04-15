@@ -15,6 +15,8 @@
 		6B3C72E51CBBC9840011672E /* UCAccountInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E41CBBC9840011672E /* UCAccountInfoData.swift */; };
 		6B3C72E71CBCD0850011672E /* UCVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E61CBCD0850011672E /* UCVerifyViewController.swift */; };
 		6B3C72E91CBF82B40011672E /* UCVerifyIdCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72E81CBF82B40011672E /* UCVerifyIdCardView.swift */; };
+		6B3C72EB1CC090850011672E /* UCVerifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72EA1CC090850011672E /* UCVerifyRequest.swift */; };
+		6B3C72ED1CC0B75C0011672E /* UCBankPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3C72EC1CC0B75C0011672E /* UCBankPickerView.swift */; };
 		6B46E9481C8E87FF00F7B009 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9341C8E87FF00F7B009 /* BaseNavigationController.swift */; };
 		6B46E9491C8E87FF00F7B009 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9351C8E87FF00F7B009 /* BaseViewController.swift */; };
 		6B46E94A1C8E87FF00F7B009 /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B46E9371C8E87FF00F7B009 /* BaseData.swift */; };
@@ -111,6 +113,8 @@
 		6B3C72E41CBBC9840011672E /* UCAccountInfoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCAccountInfoData.swift; sourceTree = "<group>"; };
 		6B3C72E61CBCD0850011672E /* UCVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCVerifyViewController.swift; sourceTree = "<group>"; };
 		6B3C72E81CBF82B40011672E /* UCVerifyIdCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCVerifyIdCardView.swift; sourceTree = "<group>"; };
+		6B3C72EA1CC090850011672E /* UCVerifyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCVerifyRequest.swift; sourceTree = "<group>"; };
+		6B3C72EC1CC0B75C0011672E /* UCBankPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCBankPickerView.swift; sourceTree = "<group>"; };
 		6B46E9311C8E871100F7B009 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		6B46E9341C8E87FF00F7B009 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		6B46E9351C8E87FF00F7B009 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -560,6 +564,7 @@
 				6BF91AA31CBA2D9B00F90B6C /* UCRegisterRequest.swift */,
 				6B3C72DE1CBBABFA0011672E /* UCGetUserDataRequest.swift */,
 				6B3C72E01CBBAC1B0011672E /* UCGetAccountDataRequest.swift */,
+				6B3C72EA1CC090850011672E /* UCVerifyRequest.swift */,
 			);
 			path = Net;
 			sourceTree = "<group>";
@@ -577,6 +582,7 @@
 			children = (
 				6B9D6BF71C9A97A4000F6167 /* UCInputView.swift */,
 				6B3C72E81CBF82B40011672E /* UCVerifyIdCardView.swift */,
+				6B3C72EC1CC0B75C0011672E /* UCBankPickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -809,8 +815,10 @@
 				6B6226771C90664100DDA79B /* FinancingService.swift in Sources */,
 				6B6FC0C11C92C8D500F15227 /* FinanceDetailCell.swift in Sources */,
 				6BF91AA41CBA2D9B00F90B6C /* UCRegisterRequest.swift in Sources */,
+				6B3C72EB1CC090850011672E /* UCVerifyRequest.swift in Sources */,
 				6B46E9771C8E899D00F7B009 /* GesturePasswordView.swift in Sources */,
 				6B46E9691C8E899D00F7B009 /* Commond.swift in Sources */,
+				6B3C72ED1CC0B75C0011672E /* UCBankPickerView.swift in Sources */,
 				6B9D6BF01C993FCC000F6167 /* UCUserData.swift in Sources */,
 				6B46E9CA1C900B7400F7B009 /* HomeInvestRequest.swift in Sources */,
 				6BA7D39F1C955A4C00AF2BF6 /* SelectedSegmentedBar.swift in Sources */,

@@ -34,4 +34,9 @@ class UCService: BaseService {
         let request = UCGetAccountDataRequest(token: token)
         self.doRequest(request, completion: completion, failure: failure)
     }
+    
+    class func verifyAuthInfo(data : Dictionary<String , AnyObject> , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCVerifyRequest(data: data)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
 }

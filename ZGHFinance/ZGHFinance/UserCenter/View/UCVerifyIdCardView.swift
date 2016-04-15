@@ -8,20 +8,28 @@
 
 import UIKit
 
+struct CardInfo {
+    var icon    : UIImage?
+    var name    : String?
+    var id      : String?
+    var status  : String?
+}
+
 class UCVerifyIdCardView: UIView {
 
-    var name                : String? {
+    var cardInfo            : CardInfo? {
         didSet {
-            nameLabel.text  = name
+            if cardInfo != nil {
+                avatar.image        = cardInfo?.icon
+                nameLabel.text      = cardInfo?.name
+                idCard.text         = cardInfo?.id
+                statusLabel.text    = cardInfo?.status
+            }
         }
     }
-    
-    var id                  : String? {
-        didSet{
-            idCard.text     = id
-        }
-    }
+    private var avatar      : UIImageView!
     private var nameLabel   : UILabel!
+    private var statusLabel : UILabel!
     private var idCard      : UILabel!
     
     override init(frame: CGRect) {
@@ -32,7 +40,7 @@ class UCVerifyIdCardView: UIView {
         self.layer.borderColor  = UtilTool.colorWithHexString("#53a0e3").CGColor
         self.layer.borderWidth  = 1
         
-        let avatar              = UIImageView(image: UIImage(named: "uc_login_icon.jpg"))
+        avatar                  = UIImageView(image: UIImage(named: "uc_login_icon.jpg"))
         self.addSubview(avatar)
         
         avatar.mas_makeConstraints { (maker) in
@@ -47,8 +55,8 @@ class UCVerifyIdCardView: UIView {
         nameLabel.textColor     = UtilTool.colorWithHexString("#666")
         self.addSubview(nameLabel)
         nameLabel.mas_makeConstraints { (maker) in
-            maker.left.equalTo()(avatar.mas_right).offset()(30)
-            maker.top.equalTo()(avatar)
+            maker.left.equalTo()(self.avatar.mas_right).offset()(30)
+            maker.top.equalTo()(self.avatar)
             maker.height.equalTo()(14)
         }
         
@@ -58,7 +66,7 @@ class UCVerifyIdCardView: UIView {
         self.addSubview(idCard)
         idCard.mas_makeConstraints { (maker) in
             maker.left.equalTo()(self.nameLabel)
-            maker.bottom.equalTo()(avatar)
+            maker.bottom.equalTo()(self.avatar)
             maker.height.equalTo()(12)
         }
         
@@ -69,10 +77,9 @@ class UCVerifyIdCardView: UIView {
             maker.centerY.equalTo()(self.nameLabel)
         }
         
-        let statusLabel         = UILabel()
+        statusLabel         = UILabel()
         statusLabel.font        = UIFont.systemFontOfSize(12)
         statusLabel.textColor   = UIColor.greenColor()
-        statusLabel.text        = "已认证"
         self.addSubview(statusLabel)
         statusLabel.mas_makeConstraints { (maker) in
             maker.left.equalTo()(statusImg.mas_right).offset()(4)

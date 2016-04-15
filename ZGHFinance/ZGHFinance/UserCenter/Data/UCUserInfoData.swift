@@ -14,4 +14,6 @@ class UCUserInfoData: BaseData {
     var idCard      : String = ""
     var cellPhone   : String = ""
     var loveCoins   : Int    = 0
+    var bankName    : String = ""
+    var bankCard    : String = ""
 }

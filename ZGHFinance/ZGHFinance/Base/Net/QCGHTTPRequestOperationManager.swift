@@ -10,12 +10,13 @@ import UIKit
 
 class QCGHTTPRequestOperationManager: AFHTTPRequestOperationManager
 {
-    
+    static var keepResponseSerializer : AFHTTPResponseSerializer?
     class var sharedOperationManager: QCGHTTPRequestOperationManager
     {
         dispatch_once(&Inner.token)
         {
             Inner.instance                      = QCGHTTPRequestOperationManager()
+            keepResponseSerializer              = Inner.instance?.responseSerializer
             let securityPolicy                  = AFSecurityPolicy(pinningMode: AFSSLPinningMode.None)
             securityPolicy.validatesDomainName  = false
             securityPolicy.allowInvalidCertificates = true
