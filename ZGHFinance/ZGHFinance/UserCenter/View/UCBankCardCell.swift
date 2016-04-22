@@ -117,8 +117,8 @@ class UCBankCardCell: UITableViewCell {
         selectImg.mas_makeConstraints { (maker) in
             maker.top.equalTo()(self.cardView).offset()(10)
             maker.right.equalTo()(self.cardView).offset()(-10)
-            maker.width.equalTo()(25)
-            maker.height.equalTo()(25)
+            maker.width.equalTo()(15)
+            maker.height.equalTo()(15)
         }
         
         selectBtn.mas_makeConstraints { (maker) in

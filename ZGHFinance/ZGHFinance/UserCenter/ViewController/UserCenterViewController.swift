@@ -171,7 +171,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         
         let withdrawBtn                 = BaseButton()
         withdrawBtn.layer.cornerRadius  = 4
-        rechargeBtn.tag                 = 999
+        withdrawBtn.tag                 = 999
         withdrawBtn.titleLabel?.font    = UIFont.systemFontOfSize(14)
         withdrawBtn.backgroundColor     = UtilTool.colorWithHexString("#ff6600")
         withdrawBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
@@ -330,13 +330,33 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     }
     
     @objc private func rechargeAction(btn : BaseButton) {
+        
         if !UtilCheck.isLogin() {
             let loginVc         = UCLoginViewController()
             loginVc.callBack    = {Void in
-                print("去充值")
+                if btn.tag == 888 {
+                    self.goRecharge()
+                }else{
+                    self.goWithdraw()
+                }
             }
             self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+        }else{
+            if btn.tag == 888 {
+                goRecharge()
+            }else{
+                goWithdraw()
+            }
         }
+    }
+    
+    private func goRecharge() {
+        let rechargeVc          = UCRechargeViewController()
+        self.navigationController?.pushViewController(rechargeVc, animated: true)
+    }
+    
+    private func goWithdraw() {
+        
     }
     
     @objc private func realNameVerify() {

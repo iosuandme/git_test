@@ -12,7 +12,7 @@ class UCBankCardsData: BaseData {
     var cardList        : Array<UCBankCardInfo> = Array()
 }
 
-struct UCBankCardInfo {
+class UCBankCardInfo: NSObject {
     var cardId          : String = ""
     var cardNo          : String = ""
     var cardName        : String = ""

@@ -29,6 +29,11 @@ class UCBankCardListController: BaseViewController {
             self.title                           = "选择银行卡"
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshData()
+    }
 
     override func initUI() {
         super.initUI()
@@ -78,7 +83,7 @@ class UCBankCardListController: BaseViewController {
     }
     
     override func needRefrshData() -> Bool {
-        return true
+        return false
     }
     
     private func setupRefresh(){
@@ -123,6 +128,7 @@ extension UCBankCardListController : UCBankCardCellDelegate {
     func bankCardChoosenWithIndex(index: Int) {
         if optionType == .Select {
             callBack?(cardList[index])
+            self.navigationController?.popViewControllerAnimated(true)
         }else{
             print(cardList[index].cardName)
         }
@@ -134,13 +140,13 @@ extension UCBankCardListController {
     
     override func refreshData() {
         endRefresh()
-        var card0       = UCBankCardInfo()
+        let card0       = UCBankCardInfo()
         card0.cardName  = "民生银行"
         card0.cardId    = "1"
         card0.cardNo    = "6226170102042203"
         card0.desc      = "默认绑定银行卡，不可更改"
         
-        var card1       = UCBankCardInfo()
+        let card1       = UCBankCardInfo()
         card1.cardName  = "招商银行"
         card1.cardId    = "2"
         card1.cardNo    = "6222170102043002"
@@ -152,7 +158,7 @@ extension UCBankCardListController {
     
     private func showSelected() {
         if optionType == .Select {
-            for var d in cardList {
+            for d in cardList {
                 if selectionData != nil {
                     if selectionData?.cardId == d.cardId {
                         d.isSelected    = true
@@ -160,11 +166,7 @@ extension UCBankCardListController {
                         d.isSelected    = false
                     }
                 }else{
-                    if cardList.first?.cardId == d.cardId {
-                        d.isSelected    = true
-                    }else{
-                        d.isSelected    = false
-                    }
+                    d.isSelected    = false
                 }
             }
             
