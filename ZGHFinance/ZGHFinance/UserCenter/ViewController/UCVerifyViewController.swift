@@ -53,7 +53,7 @@ class UCVerifyViewController: BaseViewController , UCInputViewDelegate , UCBankP
                 })
                 var info : CardInfo?
                 if type == 1 {
-                    info                    = CardInfo(icon: UIImage(named: "uc_login_icon.jpg"), name: userData?.realname, id: userData!.idCard, status: "已认证")
+                    info                    = CardInfo(icon: UIImage(named: "uc_login_icon.jpg"), name: userData?.realname, id: UtilTool.idCardFormat(userData!.idCard), status: "已认证")
                     
                 }else{
                     info                    = CardInfo(icon: UIImage(named: userData!.bankName), name: UtilTool.getBankName(userData!.bankName), id: UtilTool.bankCardFormat(userData!.bankCard), status: "已绑定")

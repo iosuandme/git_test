@@ -38,7 +38,7 @@ class UCLoginViewController: BaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //phoneText.becomeFirstResponder()
+        phoneInput.becomeFirstResponder()
     }
     
     override func viewWillDisappear(animated: Bool) {

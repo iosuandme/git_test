@@ -442,7 +442,27 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
         case 0 :
-            fallthrough
+            if UtilCheck.isLogin() {
+                if userInfo!.idCard.isEmpty {
+                    let verifyVc            = UCVerifyViewController()
+                    verifyVc.type           = indexPath.row
+                    verifyVc.userData       = userInfo
+                    self.navigationController?.pushViewController(verifyVc, animated: true)
+                }else{
+                    let cardVc              = UCBankCardListController()
+                    self.navigationController?.pushViewController(cardVc, animated: true)
+                }
+            }else{
+                let loginVc             = UCLoginViewController()
+                loginVc.callBack        = {Void in
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                        self.refreshData()
+                    })
+                    
+                }
+                self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
+            }
         case 1 :
             if UtilCheck.isLogin() {
                 let verifyVc            = UCVerifyViewController()
@@ -460,14 +480,13 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { 
                         self.refreshData()
                     })
-                    
+    
                 }
                 self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
             }
         case 2 :
-            //登录非登录,不同的显示
-            print("更多信息")
-            UtilCookie.logout()
+            let moreVc                  = UCMoreInfoViewController()
+            self.navigationController?.pushViewController(moreVc, animated: true)
         default :
             break
         }

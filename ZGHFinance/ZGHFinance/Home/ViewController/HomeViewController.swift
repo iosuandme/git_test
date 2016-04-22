@@ -15,7 +15,7 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title              = "首页"
+        self.title              = "中赣核普惠金融"
         // Do any additional setup after loading the view.
     }
     
