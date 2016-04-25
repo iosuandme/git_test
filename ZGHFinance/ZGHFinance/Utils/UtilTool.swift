@@ -154,7 +154,7 @@ enum ParseNumberType : Int {
         let range = formatStr.rangeOfString(preString)
         let subStr : NSString = formatStr.substringFromIndex(range.length)
         let attributedString = NSMutableAttributedString(string: formatStr as String);
-        let redcolorAttributes = [NSForegroundColorAttributeName: color, NSFontAttributeName: UIFont.systemFontOfSize(12 * power)]
+        let redcolorAttributes = [NSForegroundColorAttributeName: color, NSFontAttributeName: UIFont.systemFontOfSize(14 * power)]
         attributedString.addAttributes(redcolorAttributes, range: NSMakeRange(range.length, subStr.rangeOfString(desString).length))
         return attributedString
     }

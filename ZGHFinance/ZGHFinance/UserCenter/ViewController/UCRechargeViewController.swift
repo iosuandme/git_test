@@ -10,6 +10,7 @@ import UIKit
 
 class UCRechargeViewController: BaseViewController {
     
+    var  cellPhone                  : String    = ""
     private var scrollView          : UIScrollView!
     private var cardNoLabel         : UILabel!
     private var cardNameLabel       : UILabel!
@@ -284,7 +285,9 @@ class UCRechargeViewController: BaseViewController {
     @objc private func rechargeAction() {
         
         var error               = ""
-        if amountInput.text!.isEmpty {
+        if bankInfo == nil {
+            error               = "请选择充值银行卡"
+        }else if amountInput.text!.isEmpty {
             error               = "请输入充值金额"
             amountInput.becomeFirstResponder()
         }else if Double(amountInput.text!) == nil {
@@ -298,7 +301,9 @@ class UCRechargeViewController: BaseViewController {
         if error.isEmpty {
             let tmpAmount           = Int(Double(amountInput.text!)! * 100)
             let amount              = (Double(tmpAmount) / 100).formatDecimal(false)
-            print("充值金额：\(amount)")
+            let confirmVc           = UCRechargeConfirmController()
+            confirmVc.rechargeInfo  = RechargeData(bankInfo: bankInfo, amount: amount, cellPhone: cellPhone)
+            self.navigationController?.pushViewController(confirmVc, animated: true)
             
         }else{
             UtilTool.noticError(view: self.view, msg: error)
@@ -310,8 +315,10 @@ extension UCRechargeViewController : UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if range.length == 0 {
-            guard let _ = Int(string) where string != "." else{
-                return false
+            if string != "." {
+                guard let _ = Int(string) else{
+                    return false
+                }
             }
             if string == "." && (textField.text!.containsString(string) || textField.text!.isEmpty) {
                 return false

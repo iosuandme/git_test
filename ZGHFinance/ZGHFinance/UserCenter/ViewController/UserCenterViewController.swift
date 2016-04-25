@@ -334,11 +334,11 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         if !UtilCheck.isLogin() {
             let loginVc         = UCLoginViewController()
             loginVc.callBack    = {Void in
-                if btn.tag == 888 {
+                /*if btn.tag == 888 {
                     self.goRecharge()
                 }else{
                     self.goWithdraw()
-                }
+                }*/
             }
             self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
         }else{
@@ -351,8 +351,15 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     }
     
     private func goRecharge() {
-        let rechargeVc          = UCRechargeViewController()
-        self.navigationController?.pushViewController(rechargeVc, animated: true)
+        if userInfo != nil {
+            let rechargeVc          = UCRechargeViewController()
+            rechargeVc.cellPhone    = userInfo!.cellPhone
+            self.navigationController?.pushViewController(rechargeVc, animated: true)
+        }else{
+            UtilTool.noticError(view: self.view, msg: "用户信息获取错误")
+            refreshData()
+        }
+        
     }
     
     private func goWithdraw() {
