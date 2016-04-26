@@ -70,6 +70,9 @@
 		6B6FC0C31C92C8ED00F15227 /* FinanceRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FC0C21C92C8ED00F15227 /* FinanceRecordCell.swift */; };
 		6B7389C91CCDF2EB00FFCD76 /* HomeInvestPayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389C81CCDF2EB00FFCD76 /* HomeInvestPayController.swift */; };
 		6B7389CB1CCF68B400FFCD76 /* UCProjectPayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389CA1CCF68B400FFCD76 /* UCProjectPayRequest.swift */; };
+		6B7389CD1CCF741400FFCD76 /* UCAddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389CC1CCF741400FFCD76 /* UCAddBankCardViewController.swift */; };
+		6B7389CF1CCF92D400FFCD76 /* UCGetCardListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389CE1CCF92D400FFCD76 /* UCGetCardListRequest.swift */; };
+		6B7389D31CCFA01E00FFCD76 /* UCAddBankCardRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389D21CCFA01E00FFCD76 /* UCAddBankCardRequest.swift */; };
 		6B7A6DF01C9FDB1D00B25E13 /* UCMobileCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */; };
 		6B92F8E01CC361B1004BA55A /* UCMoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B92F8DF1CC361B1004BA55A /* UCMoreInfoViewController.swift */; };
 		6B9D6BF01C993FCC000F6167 /* UCUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */; };
@@ -178,6 +181,9 @@
 		6B6FC0C21C92C8ED00F15227 /* FinanceRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceRecordCell.swift; sourceTree = "<group>"; };
 		6B7389C81CCDF2EB00FFCD76 /* HomeInvestPayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInvestPayController.swift; sourceTree = "<group>"; };
 		6B7389CA1CCF68B400FFCD76 /* UCProjectPayRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCProjectPayRequest.swift; sourceTree = "<group>"; };
+		6B7389CC1CCF741400FFCD76 /* UCAddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCAddBankCardViewController.swift; sourceTree = "<group>"; };
+		6B7389CE1CCF92D400FFCD76 /* UCGetCardListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCGetCardListRequest.swift; sourceTree = "<group>"; };
+		6B7389D21CCFA01E00FFCD76 /* UCAddBankCardRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCAddBankCardRequest.swift; sourceTree = "<group>"; };
 		6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCMobileCodeRequest.swift; sourceTree = "<group>"; };
 		6B92F8DF1CC361B1004BA55A /* UCMoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCMoreInfoViewController.swift; sourceTree = "<group>"; };
 		6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCUserData.swift; sourceTree = "<group>"; };
@@ -584,6 +590,8 @@
 				6B3C72E01CBBAC1B0011672E /* UCGetAccountDataRequest.swift */,
 				6B3C72EA1CC090850011672E /* UCVerifyRequest.swift */,
 				6B7389CA1CCF68B400FFCD76 /* UCProjectPayRequest.swift */,
+				6B7389CE1CCF92D400FFCD76 /* UCGetCardListRequest.swift */,
+				6B7389D21CCFA01E00FFCD76 /* UCAddBankCardRequest.swift */,
 			);
 			path = Net;
 			sourceTree = "<group>";
@@ -618,6 +626,7 @@
 				6B92F8DF1CC361B1004BA55A /* UCMoreInfoViewController.swift */,
 				6BE911351CC87AAA00FEF07A /* UCRechargeViewController.swift */,
 				6BE911371CC87D5B00FEF07A /* UCRechargeConfirmController.swift */,
+				6B7389CC1CCF741400FFCD76 /* UCAddBankCardViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -790,6 +799,7 @@
 			files = (
 				6B46E96E1C8E899D00F7B009 /* UtilCheck.swift in Sources */,
 				6B62267B1C9066A700DDA79B /* FinancingListData.swift in Sources */,
+				6B7389CD1CCF741400FFCD76 /* UCAddBankCardViewController.swift in Sources */,
 				6B46E94E1C8E87FF00F7B009 /* BaseRequest.swift in Sources */,
 				6B46E9CC1C900B8B00F7B009 /* HomeBenefitRequest.swift in Sources */,
 				6BDA68161C97BB8F00D0CBF3 /* HomeBenefitDetailViewController.swift in Sources */,
@@ -815,6 +825,7 @@
 				6BA447EA1C91248E00703932 /* FinanceDetailHeaderView.swift in Sources */,
 				6B6FC0C31C92C8ED00F15227 /* FinanceRecordCell.swift in Sources */,
 				6B3C72E71CBCD0850011672E /* UCVerifyViewController.swift in Sources */,
+				6B7389CF1CCF92D400FFCD76 /* UCGetCardListRequest.swift in Sources */,
 				6BDA68141C97BB4E00D0CBF3 /* HomeBenefitListViewController.swift in Sources */,
 				6B46E9721C8E899D00F7B009 /* UtilExtensions.swift in Sources */,
 				6B46E9991C8E8A8500F7B009 /* ButtonForTab.swift in Sources */,
@@ -849,6 +860,7 @@
 				6B46E9771C8E899D00F7B009 /* GesturePasswordView.swift in Sources */,
 				6B46E9691C8E899D00F7B009 /* Commond.swift in Sources */,
 				6B3C72ED1CC0B75C0011672E /* UCBankPickerView.swift in Sources */,
+				6B7389D31CCFA01E00FFCD76 /* UCAddBankCardRequest.swift in Sources */,
 				6B9D6BF01C993FCC000F6167 /* UCUserData.swift in Sources */,
 				6B46E9CA1C900B7400F7B009 /* HomeInvestRequest.swift in Sources */,
 				6BE9113E1CC8C56600FEF07A /* UCBankCardCell.swift in Sources */,

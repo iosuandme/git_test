@@ -477,6 +477,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
                     self.navigationController?.pushViewController(verifyVc, animated: true)
                 }else{
                     let cardVc              = UCBankCardListController()
+                    cardVc.userInfo         = userInfo
                     self.navigationController?.pushViewController(cardVc, animated: true)
                 }
             }else{

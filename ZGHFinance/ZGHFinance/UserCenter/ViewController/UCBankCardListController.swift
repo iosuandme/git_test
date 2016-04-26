@@ -15,6 +15,7 @@ enum BankCardOptionType : Int {
 
 class UCBankCardListController: BaseViewController {
     
+    var userInfo            : UCUserInfoData?
     var optionType          : BankCardOptionType        = .Add
     var selectionData       : UCBankCardInfo?
     var callBack            : ((UCBankCardInfo) -> Void)?
@@ -79,7 +80,9 @@ class UCBankCardListController: BaseViewController {
     }
     
     @objc private func addCardAction() {
-        
+        let addVc                               = UCAddBankCardViewController()
+        addVc.userInfo                          = userInfo
+        self.navigationController?.pushViewController(addVc, animated: true)
     }
     
     override func needRefrshData() -> Bool {
@@ -139,21 +142,24 @@ extension UCBankCardListController : UCBankCardCellDelegate {
 extension UCBankCardListController {
     
     override func refreshData() {
-        endRefresh()
-        let card0       = UCBankCardInfo()
-        card0.cardName  = "民生银行"
-        card0.cardId    = "1"
-        card0.cardNo    = "6226170102042203"
-        card0.desc      = "默认绑定银行卡，不可更改"
         
-        let card1       = UCBankCardInfo()
-        card1.cardName  = "招商银行"
-        card1.cardId    = "2"
-        card1.cardNo    = "6222170102043002"
-        card1.desc      = "拓展充值银行卡，不可更改"
-        
-        cardList        = [card0,card1]
-        showSelected()
+        if let userData = Commond.getUserDefaults("userData") as? UCUserData {
+            UCService.getUserBankCardList(userData.loginToken, completion: { (data) in
+                self.endRefresh()
+                if data?.cjxnfsCode == 10000 {
+                    self.cardList = (data as! UCBankCardsData).cardList
+                    self.showSelected()
+                }else{
+                    UtilTool.noticError(view: self.view, msg: data!.responseMsg!)
+                }
+                }, failure: { (error) in
+                    self.endRefresh()
+                    UtilTool.noticError(view: self.view, msg: error.msg!)
+            })
+        }else{
+            endRefresh()
+            UtilTool.noticError(view: self.view, msg: "未登录")
+        }
     }
     
     private func showSelected() {

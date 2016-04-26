@@ -40,6 +40,11 @@ class UCService: BaseService {
         self.doRequest(request, completion: completion, failure: failure)
     }
     
+    class func getUserBankCardList(token : String , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCGetCardListRequest(token: token)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
+    
     class func payForBidWithParams(isBenefit : Bool , params : Dictionary<String , AnyObject> , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
         let request = UCProjectPayRequest(isBenefit: isBenefit, data: params)
         self.doRequest(request, completion: completion, failure: failure)
