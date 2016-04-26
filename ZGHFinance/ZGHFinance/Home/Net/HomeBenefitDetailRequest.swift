@@ -11,10 +11,12 @@ import UIKit
 class HomeBenefitDetailRequest: BaseRequest {
 
     private var benefitId   : String = ""
+    private var needContent : Bool   = true
     
-    required init(id : String) {
+    required init(id : String , needContent : Bool) {
         super.init()
         benefitId           = id
+        self.needContent    = needContent
         self.isPostMethod   = false
     }
     
@@ -47,7 +49,9 @@ class HomeBenefitDetailRequest: BaseRequest {
             benefitDetail.total             = tmpDic.parseNumber("total", numberType: ParseNumberType.int) as! Int
             benefitDetail.collected         = tmpDic.parseNumber("collected", numberType: ParseNumberType.int) as! Int
             benefitDetail.org               = bc["org"] + ""
-            benefitDetail.content           = bc["content"] + ""
+            if needContent {
+                benefitDetail.content       = bc["content"] + ""
+            }
             
         }else{
             benefitDetail.cjxnfsCode        = 10001

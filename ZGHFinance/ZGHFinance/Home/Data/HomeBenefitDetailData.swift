@@ -19,7 +19,7 @@ class HomeBenefitDetailData: BaseData , UIWebViewDelegate {
     var content     : String        = "" {
         didSet {
             if !content.isEmpty {
-                webView             = UIWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH - 32, height: 50))
+                let webView         = UIWebView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH - 32, height: 50))
                 webView.hidden      = true
                 webView.delegate    = self
                 UtilTool.getAppDelegate().window?.addSubview(webView)
@@ -28,7 +28,6 @@ class HomeBenefitDetailData: BaseData , UIWebViewDelegate {
         }
     }
     var contentHeight   : CGFloat   = 0
-    private var webView : UIWebView!
     
     func webViewDidFinishLoad(webView: UIWebView) {
         webView.sizeToFit()

@@ -68,6 +68,8 @@
 		6B6FC0BF1C9276D700F15227 /* FinanceDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FC0BE1C9276D700F15227 /* FinanceDetailData.swift */; };
 		6B6FC0C11C92C8D500F15227 /* FinanceDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FC0C01C92C8D500F15227 /* FinanceDetailCell.swift */; };
 		6B6FC0C31C92C8ED00F15227 /* FinanceRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6FC0C21C92C8ED00F15227 /* FinanceRecordCell.swift */; };
+		6B7389C91CCDF2EB00FFCD76 /* HomeInvestPayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389C81CCDF2EB00FFCD76 /* HomeInvestPayController.swift */; };
+		6B7389CB1CCF68B400FFCD76 /* UCProjectPayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389CA1CCF68B400FFCD76 /* UCProjectPayRequest.swift */; };
 		6B7A6DF01C9FDB1D00B25E13 /* UCMobileCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */; };
 		6B92F8E01CC361B1004BA55A /* UCMoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B92F8DF1CC361B1004BA55A /* UCMoreInfoViewController.swift */; };
 		6B9D6BF01C993FCC000F6167 /* UCUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */; };
@@ -174,6 +176,8 @@
 		6B6FC0BE1C9276D700F15227 /* FinanceDetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceDetailData.swift; sourceTree = "<group>"; };
 		6B6FC0C01C92C8D500F15227 /* FinanceDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceDetailCell.swift; sourceTree = "<group>"; };
 		6B6FC0C21C92C8ED00F15227 /* FinanceRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceRecordCell.swift; sourceTree = "<group>"; };
+		6B7389C81CCDF2EB00FFCD76 /* HomeInvestPayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInvestPayController.swift; sourceTree = "<group>"; };
+		6B7389CA1CCF68B400FFCD76 /* UCProjectPayRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCProjectPayRequest.swift; sourceTree = "<group>"; };
 		6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCMobileCodeRequest.swift; sourceTree = "<group>"; };
 		6B92F8DF1CC361B1004BA55A /* UCMoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCMoreInfoViewController.swift; sourceTree = "<group>"; };
 		6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCUserData.swift; sourceTree = "<group>"; };
@@ -542,6 +546,7 @@
 				6B46E9AC1C8E8CC000F7B009 /* HomeViewController.swift */,
 				6BDA68131C97BB4E00D0CBF3 /* HomeBenefitListViewController.swift */,
 				6BDA68151C97BB8F00D0CBF3 /* HomeBenefitDetailViewController.swift */,
+				6B7389C81CCDF2EB00FFCD76 /* HomeInvestPayController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -578,6 +583,7 @@
 				6B3C72DE1CBBABFA0011672E /* UCGetUserDataRequest.swift */,
 				6B3C72E01CBBAC1B0011672E /* UCGetAccountDataRequest.swift */,
 				6B3C72EA1CC090850011672E /* UCVerifyRequest.swift */,
+				6B7389CA1CCF68B400FFCD76 /* UCProjectPayRequest.swift */,
 			);
 			path = Net;
 			sourceTree = "<group>";
@@ -788,6 +794,7 @@
 				6B46E9CC1C900B8B00F7B009 /* HomeBenefitRequest.swift in Sources */,
 				6BDA68161C97BB8F00D0CBF3 /* HomeBenefitDetailViewController.swift in Sources */,
 				6B3C72DD1CBB8B650011672E /* SMAlertView.swift in Sources */,
+				6B7389CB1CCF68B400FFCD76 /* UCProjectPayRequest.swift in Sources */,
 				6B46E9501C8E87FF00F7B009 /* QCGHTTPRequestOperationManager.swift in Sources */,
 				6B46E9A31C8E8A8500F7B009 /* RefreshHeaderView.swift in Sources */,
 				6B46E9481C8E87FF00F7B009 /* BaseNavigationController.swift in Sources */,
@@ -833,6 +840,7 @@
 				6B46E94A1C8E87FF00F7B009 /* BaseData.swift in Sources */,
 				6B46E9B11C8E8D0500F7B009 /* FinancingViewController.swift in Sources */,
 				6B92F8E01CC361B1004BA55A /* UCMoreInfoViewController.swift in Sources */,
+				6B7389C91CCDF2EB00FFCD76 /* HomeInvestPayController.swift in Sources */,
 				6B46E94F1C8E87FF00F7B009 /* NetCommonFun.swift in Sources */,
 				6B6226771C90664100DDA79B /* FinancingService.swift in Sources */,
 				6B6FC0C11C92C8D500F15227 /* FinanceDetailCell.swift in Sources */,

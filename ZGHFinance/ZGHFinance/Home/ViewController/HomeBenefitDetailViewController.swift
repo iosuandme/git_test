@@ -224,12 +224,19 @@ class HomeBenefitDetailViewController: BaseViewController , UITableViewDataSourc
     }
     
     func benefitHeaderTouchEvent() {
+        
+        func invest() {
+            let investVc        = HomeInvestPayController()
+            investVc.id         = id
+            self.navigationController?.pushViewController(investVc, animated: true)
+        }
+        
         if UtilCheck.isLogin() {
-            print("登陆投资")
+            invest()
         }else{
             let loginVc         = UCLoginViewController()
             loginVc.callBack    = {Void in
-                print("登陆投资")
+                invest()
             }
             self.presentViewController(UtilTool.getAppDelegate().navi, animated: true, completion: nil)
         }

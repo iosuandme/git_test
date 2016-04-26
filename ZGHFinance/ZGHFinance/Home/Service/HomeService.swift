@@ -20,8 +20,8 @@ class HomeService: BaseService {
         self.doRequest(request, completion: completion, failure: failure)
     }
     
-    class func getHomeBenefitDetailData(id : String, completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
-        let request     = HomeBenefitDetailRequest(id: id)
+    class func getHomeBenefitDetailData(id : String, needContent : Bool = true , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request     = HomeBenefitDetailRequest(id: id , needContent: needContent)
         self.doRequest(request, completion: completion, failure: failure)
     }
     
