@@ -218,8 +218,13 @@ class UCRechargeConfirmController: BaseViewController {
     private func showInfo() {
         if rechargeInfo != nil {
             amountLabel.attributedText          = UtilTool.colorString(desString: rechargeInfo.amount, color: UtilTool.colorWithHexString("#ff6600"), util: "元")
-            let index                           = rechargeInfo.bankInfo.cardNo.length() - 4
-            let cardNo                          = "(尾号\((rechargeInfo.bankInfo.cardNo as NSString).substringFromIndex(index)))"
+            var cardNo                          = ""
+            if rechargeInfo.bankInfo.cardNo.length() < 4 {
+                cardNo                          = "(\(rechargeInfo.bankInfo.cardNo))"
+            }else{
+                let len                         = rechargeInfo.bankInfo.cardNo.length() - 4
+                cardNo                          = "(尾号\((rechargeInfo.bankInfo.cardNo as NSString).substringFromIndex(len)))"
+            }
             cardNameLabel.attributedText        = UtilTool.attributeString("", desString: rechargeInfo.bankInfo.cardName, afterString: cardNo, dic: ["desColor" : UtilTool.colorWithHexString("#666") , "desFont" : UIFont.systemFontOfSize(14) , "afterColor" : UtilTool.colorWithHexString("#a8a8a9") , "afterFont" : UIFont.systemFontOfSize(11)])
             phoneLabel.text                     = rechargeInfo.cellPhone
         }

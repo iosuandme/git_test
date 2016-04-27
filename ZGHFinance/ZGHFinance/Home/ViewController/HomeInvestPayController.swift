@@ -134,6 +134,17 @@ class HomeInvestPayController: BaseViewController {
             maker.height.equalTo()(12)
         }
         
+        let infoBtn                     = BaseButton()
+        infoBtn.setImage(UIImage(named: "uc_property_icon_warning"), forState: UIControlState.Normal)
+        infoBtn.addTarget(self, action: #selector(HomeInvestPayController.showInfo), forControlEvents: UIControlEvents.TouchUpInside)
+        contentView.addSubview(infoBtn)
+        infoBtn.mas_makeConstraints { (maker) in
+            maker.left.equalTo()(self.balanceHint.mas_right).offset()(6)
+            maker.centerY.equalTo()(self.balanceHint)
+            maker.width.equalTo()(20)
+            maker.height.equalTo()(20)
+        }
+        
         balanceLabel                            = UILabel()
         balanceLabel.font                       = UIFont.systemFontOfSize(12)
         balanceLabel.textColor                  = UtilTool.colorWithHexString("#ff6600")
@@ -186,6 +197,11 @@ class HomeInvestPayController: BaseViewController {
             maker.height.equalTo()(40)
         }
         
+    }
+    
+    @objc private func showInfo() {
+        let alert               = SMAlertView(title: "什么是爱心币", message: "爱心币是用于捐赠公益项目的代币，首次注册会获取一定数量的爱心币，某些线下活动也能获取爱心币奖励(如投资活动)，爱心币不可通过充值获取。捐赠的爱心币会以等额的价值由中赣核普惠金融资助给公益项目的组织者。", delegate: nil, cancelButtonTitle: "我知道了")
+        alert.show()
     }
     
     override func needRefrshData() -> Bool {

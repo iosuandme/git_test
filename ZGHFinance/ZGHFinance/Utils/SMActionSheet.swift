@@ -25,11 +25,11 @@ class SMActionSheet: UIView {
     }
     var itemSpace              : CGFloat = 0
     var titleFontSize          : CGFloat = 10
-    var titleColor             : UIColor = UtilTool.colorWithHexString("#657e8a")
+    var titleColor             : UIColor = UtilTool.colorWithHexString("#a8a8a9")
     var sheetFontSize          : CGFloat = 12
-    var sheetColor             : UIColor = UtilTool.colorWithHexString("#657e8a")
-    var bgColor                : UIColor = UtilTool.colorWithHexString("#2f4048")
-    var lineColor              : UIColor = UtilTool.colorWithHexString("#232d32")
+    var sheetColor             : UIColor = UtilTool.colorWithHexString("#666")
+    var bgColor                : UIColor = UtilTool.colorWithHexString("#ffffff")
+    var lineColor              : UIColor = UtilTool.colorWithHexString("#ddd")
     var shadowColor            : UIColor = UtilTool.colorWithHexString("#0000007d")
     weak var delegate          : SMActionSheetDelegate?
     var title                  : String?
@@ -323,7 +323,7 @@ class SMActionSheet: UIView {
                     })
                 }
                 if i == 1 && (destructiveButtonTitle != nil || destructiveButtonImage != nil){
-                    btn.setTitleColor(UtilTool.colorWithHexString("#000"), forState: UIControlState.Normal)
+                    btn.setTitleColor(UtilTool.colorWithHexString("#ff6600"), forState: UIControlState.Normal)
                 }
                 tmpBtn = btn
             }

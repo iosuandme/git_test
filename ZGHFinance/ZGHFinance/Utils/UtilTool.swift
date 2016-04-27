@@ -261,7 +261,9 @@ enum ParseNumberType : Int {
     }
     
     class func idCardFormat(idCard : NSString) -> String {
-        
+        if idCard.length < 18 {
+            return "****错误身份信息****"
+        }
         let frontFour = idCard.substringToIndex(4)
         let backFour = idCard.substringFromIndex(idCard.length - 4)
         return "\(frontFour)**********\(backFour)"
@@ -269,7 +271,9 @@ enum ParseNumberType : Int {
     
     //银行卡号格式，传进银行，卡号 以 "XX银行 1111*** ***1111" 格式输出
     class func bankCardFormat(cardNo : NSString) -> String {
-        
+        if cardNo.length < 10 {
+            return cardNo as String
+        }
         let frontFour = cardNo.substringToIndex(4)
         let backFour = cardNo.substringFromIndex(cardNo.length - 4)
         return "\(frontFour) **** **** \(backFour)"

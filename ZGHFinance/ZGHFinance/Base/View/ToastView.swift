@@ -54,8 +54,10 @@ class ToastView: UIView
         messageLabel                    = UILabel()
         messageLabel.font               = UIFont.systemFontOfSize(10)
         messageLabel.textAlignment      = NSTextAlignment.Center
+        messageLabel.textColor          = UtilTool.colorWithHexString("#53a0e3")
         cancelBtn                       = UIButton()
         waitingView                     = UIImageView()
+        waitingView.tintColor           = UtilTool.colorWithHexString("#53a0e3")
         iconView                        = UIImageView()
 //        split                           = UIImageView()
         
@@ -70,7 +72,7 @@ class ToastView: UIView
         let insets                      = UIEdgeInsetsMake(8, 8, 8, 8)
         let imge                        = image?.resizableImageWithCapInsets(insets, resizingMode: UIImageResizingMode.Stretch)
         bgView.image                    = imge
-        waitingView.image               = UIImage(named: "main_image_toast_progress")
+        waitingView.image               = UIImage(named: "main_image_toast_progress")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         iconView.image                  = UIImage(named: "main_image_toast_logo")
         cancelBtn.setImage(UIImage(named: "main_image_toast_cancel"), forState: UIControlState.Normal)
         
@@ -86,6 +88,8 @@ class ToastView: UIView
         iconView.mas_makeConstraints { (maker) -> Void in
             maker.centerX.equalTo()(weakSelf)
             maker.top.equalTo()(weakSelf).offset()(28)
+            maker.width.equalTo()(18)
+            maker.height.equalTo()(18)
         }
         
         waitingView.mas_makeConstraints { (maker) -> Void in
@@ -211,7 +215,7 @@ class ToastView: UIView
     {
         self.hidden                     = false
         self.superview?.bringSubviewToFront(self)
-        messageLabel.textColor          = UIColor.blackColor()
+        messageLabel.textColor          = UtilTool.colorWithHexString("#53a0e3")
         messageLabel.font               = UIFont.systemFontOfSize(12)
         messageLabel.text               = msg
         messageLabel.textAlignment      = NSTextAlignment.Center

@@ -21,6 +21,7 @@ class UCBankCardListController: BaseViewController {
     var callBack            : ((UCBankCardInfo) -> Void)?
     private var tableView   : UITableView?
     private var cardList    : Array<UCBankCardInfo>     = Array()
+    private var tmpIndex    : Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,11 @@ class UCBankCardListController: BaseViewController {
     @objc private func addCardAction() {
         let addVc                               = UCAddBankCardViewController()
         addVc.userInfo                          = userInfo
+        var banks  : Array<String>              = Array()
+        for d in cardList {
+            banks.append(d.cardNo)
+        }
+        addVc.banks                             = banks
         self.navigationController?.pushViewController(addVc, animated: true)
     }
     
@@ -126,14 +132,59 @@ extension UCBankCardListController : UITableViewDataSource , UITableViewDelegate
 }
 
 //UCBankCardCell delegate
-extension UCBankCardListController : UCBankCardCellDelegate {
+extension UCBankCardListController : UCBankCardCellDelegate , SMActionSheetDelegate {
     
     func bankCardChoosenWithIndex(index: Int) {
         if optionType == .Select {
             callBack?(cardList[index])
             self.navigationController?.popViewControllerAnimated(true)
-        }else{
-            print(cardList[index].cardName)
+        }
+    }
+
+    func bankCardOptionWithIndex(index: Int) {
+        if optionType == .Add {
+            for v in self.view.subviews {
+                if v is SMActionSheet {
+                    return
+                }
+            }
+            let tmpData                         = cardList[index]
+            tmpIndex                            = index
+            if tmpData.desc.hasSuffix("(不可更改)") {
+                return
+            }
+            var cardNo                          = ""
+            if tmpData.cardNo.length() < 4 {
+                cardNo                          = "(\(tmpData.cardNo))"
+            }else{
+                let len                         = tmpData.cardNo.length() - 4
+                cardNo                          = "(尾号\((tmpData.cardNo as NSString).substringFromIndex(len)))"
+            }
+            let sheet = SMActionSheet(title: "选择操作\(cardNo)", delegate: self, cancelButtonTitle: "取消", cancelButtonImage: nil, destructiveButtonTitle: "解绑该银行卡", destructiveImage: nil)
+            sheet.showInView(self.view)
+        }
+    }
+    
+    func SMAlertSheet(sheet: SMActionSheet, clickButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != sheet.cancelButtonIndex {
+            if let userData = Commond.getUserDefaults("userData") as? UCUserData {
+                UCService.deleteBankCardWithParams(["token" : userData.loginToken , "bankId" : cardList[tmpIndex!].cardId], completion: { (data) in
+                    let res = data?.responseData + ""
+                    if res == "0" {
+                        self.cardList.removeAtIndex(self.tmpIndex!)
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.35 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                            self.tableView?.reloadData()
+                            self.refreshData()
+                        }
+                    }else{
+                        UtilTool.noticError(view: self.view, msg: "解绑失败(错误码\(res))")
+                    }
+                    }, failure: { (error) in
+                        UtilTool.noticError(view: self.view, msg: error.msg!)
+                })
+            }else{
+                UtilTool.noticError(view: self.view, msg: "未登录")
+            }
         }
     }
 }

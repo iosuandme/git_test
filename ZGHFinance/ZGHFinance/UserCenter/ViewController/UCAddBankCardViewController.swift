@@ -11,6 +11,7 @@ import UIKit
 class UCAddBankCardViewController: BaseViewController , UCInputViewDelegate , UCBankPickerViewDelegate{
 
     var userInfo                : UCUserInfoData?
+    var banks                   : Array<String> = Array()
     private var scrollView      : UIScrollView!
     private var optionView      : UIView!
     private var realName        : UCInputView!
@@ -67,8 +68,8 @@ class UCAddBankCardViewController: BaseViewController , UCInputViewDelegate , UC
         scrollView.addSubview(submitBtn)
         
         submitBtn.mas_makeConstraints { (maker) -> Void in
-            maker.left.equalTo()(self.optionView)
-            maker.right.equalTo()(self.optionView)
+            maker.left.equalTo()(self.optionView).offset()(16)
+            maker.right.equalTo()(self.optionView).offset()(-16)
             maker.top.equalTo()(self.optionView.mas_bottom).offset()(30)
             maker.height.equalTo()(40)
         }
@@ -149,11 +150,28 @@ class UCAddBankCardViewController: BaseViewController , UCInputViewDelegate , UC
         }else if mbCode.text!.isEmpty {
             error           = "请填写验证码"
             mbCode.becomeFirstResponder()
+        }else if banks.contains(bankCard.text!) {
+            error           = "该银行卡已存在"
+            bankCard.becomeFirstResponder()
         }
-        
+
         if error.isEmpty {
             if let userInfo = Commond.getUserDefaults("userData") as? UCUserData {
-                print("添加")
+                
+                let params : Dictionary<String , AnyObject> = ["token" : userInfo.loginToken , "bankName" : UtilTool.getBankName(bankName.text!, keyForValue: false) , "bankNo" : bankCard.text! , "location" : localAddr.text! , "mbCode" : mbCode.text!]
+                
+                UCService.addBankCardWithParams(params, completion: { (data) in
+                    let res = data?.responseData + ""
+                    if res == "0" {
+                        UtilTool.noticError(view: self.view, msg: "添加成功", complete: { 
+                            self.navigationController?.popViewControllerAnimated(true)
+                        })
+                    }else{
+                        UtilTool.noticError(view: self.view, msg: "添加失败(错误码:\(res))")
+                    }
+                    }, failure: { (error) in
+                        UtilTool.noticError(view: self.view, msg: error.msg!)
+                })
             }else{
                 UtilTool.noticError(view: self.view, msg: "未登录")
             }

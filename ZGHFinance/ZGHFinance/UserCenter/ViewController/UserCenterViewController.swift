@@ -74,7 +74,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     }
     
     private func initHeader() {
-        let headerView                  = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 318))
+        let headerView                  = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 260))
         headerView.backgroundColor      = UtilTool.colorWithHexString("#efefef")
         
         let topView                     = UIView()
@@ -160,7 +160,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
             maker.height.equalTo()(12)
         }
         
-        let rechargeBtn                 = BaseButton()
+        /*let rechargeBtn                 = BaseButton()
         rechargeBtn.layer.cornerRadius  = 4
         rechargeBtn.tag                 = 888
         rechargeBtn.titleLabel?.font    = UIFont.systemFontOfSize(14)
@@ -192,7 +192,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
             maker.right.equalTo()(headerView).offset()(-32)
             maker.top.equalTo()(topView.mas_bottom).offset()(16)
             maker.height.equalTo()(40)
-        }
+        }*/
         
         let bottomView                  = UIView()
         bottomView.backgroundColor      = UIColor.whiteColor()
@@ -200,7 +200,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         bottomView.mas_makeConstraints { (maker) in
             maker.left.equalTo()(headerView)
             maker.right.equalTo()(headerView)
-            maker.top.equalTo()(rechargeBtn.mas_bottom).offset()(16)
+            maker.top.equalTo()(topView.mas_bottom).offset()(16)
             maker.bottom.equalTo()(headerView).offset()(-16)
         }
         
@@ -235,6 +235,17 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
             maker.left.equalTo()(bottomView.mas_centerX)
             maker.top.equalTo()(accountHint)
             maker.height.equalTo()(12)
+        }
+        
+        let infoBtn                     = BaseButton()
+        infoBtn.setImage(UIImage(named: "uc_property_icon_warning"), forState: UIControlState.Normal)
+        infoBtn.addTarget(self, action: #selector(UserCenterViewController.showInfo), forControlEvents: UIControlEvents.TouchUpInside)
+        bottomView.addSubview(infoBtn)
+        infoBtn.mas_makeConstraints { (maker) in
+            maker.left.equalTo()(loverHint.mas_right).offset()(6)
+            maker.centerY.equalTo()(loverHint)
+            maker.width.equalTo()(20)
+            maker.height.equalTo()(20)
         }
         
         loverCoin                       = UILabel()
@@ -306,6 +317,11 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     }
     
     //MARK: SELS
+    
+    @objc private func showInfo() {
+        let alert               = SMAlertView(title: "什么是爱心币", message: "爱心币是用于捐赠公益项目的代币，首次注册会获取一定数量的爱心币，某些线下活动也能获取爱心币奖励(如投资活动)，爱心币不可通过充值获取。捐赠的爱心币会以等额的价值由中赣核普惠金融资助给公益项目的组织者。", delegate: nil, cancelButtonTitle: "我知道了")
+        alert.show()
+    }
     
     private func showUserInfo() {
         nameLabel.text          = userInfo?.username

@@ -81,7 +81,8 @@ class UCMoreInfoViewController: BaseViewController , UITableViewDataSource , UIT
         }else{
             let loginVc         = UCLoginViewController()
             loginVc.callBack    = {Void in
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(0.2 * Double(NSEC_PER_SEC))),  dispatch_get_main_queue(), { 
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(0.5 * Double(NSEC_PER_SEC))),  dispatch_get_main_queue(), {
+                    NSUserDefaults.standardUserDefaults().synchronize()
                     self.refreshData()
                 })
             }

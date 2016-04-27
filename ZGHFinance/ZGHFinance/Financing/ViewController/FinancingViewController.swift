@@ -30,8 +30,7 @@ class FinancingViewController: BaseViewController , UITableViewDataSource , UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title              = "理财"
-        // Do any additional setup after loading the view.
+        self.title              = "理财项目"
     }
 
     override func viewWillAppear(animated: Bool) {

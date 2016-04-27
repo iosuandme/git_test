@@ -10,6 +10,7 @@ import UIKit
 
 protocol UCBankCardCellDelegate : NSObjectProtocol {
     func bankCardChoosenWithIndex(index : Int)
+    func bankCardOptionWithIndex(index : Int)
 }
 
 class UCBankCardCell: UITableViewCell {
@@ -35,6 +36,8 @@ class UCBankCardCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle             = .None
         self.backgroundColor            = UtilTool.colorWithHexString("#efefef")
+        let longGr                      = UILongPressGestureRecognizer(target: self, action: #selector(UCBankCardCell.longPress))
+        self.addGestureRecognizer(longGr)
         initUI()
         addConstraints()
     }
@@ -135,6 +138,10 @@ class UCBankCardCell: UITableViewCell {
             maker.height.equalTo()(24)
         }
         
+    }
+    
+    @objc private func longPress() {
+        delegate?.bankCardOptionWithIndex(index)
     }
     
     @objc private func selectedAction() {

@@ -45,6 +45,16 @@ class UCService: BaseService {
         self.doRequest(request, completion: completion, failure: failure)
     }
     
+    class func addBankCardWithParams(params : Dictionary<String , AnyObject> , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCAddBankCardRequest(params: params)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
+    
+    class func deleteBankCardWithParams(params : Dictionary<String , AnyObject> , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
+        let request = UCDeleteBankCardRequest(params: params)
+        self.doRequest(request, completion: completion, failure: failure)
+    }
+    
     class func payForBidWithParams(isBenefit : Bool , params : Dictionary<String , AnyObject> , completion : ((BaseData?) -> Void),failure : ((QCGError!) -> Void)) {
         let request = UCProjectPayRequest(isBenefit: isBenefit, data: params)
         self.doRequest(request, completion: completion, failure: failure)

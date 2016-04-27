@@ -49,6 +49,10 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
         let rollView                            = HomeRollImageView(frame: CGRectMake(0, 0, self.view.bounds.width, 130), delegate: nil)
         tableView.tableHeaderView               = rollView
         rollView.showScrollView([["imgName" : "Banner2.jpg"],["imgName" : "Banner3.jpg"]])
+        
+        tableView.addHeaderWithCallback { 
+            self.refreshData()
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -58,6 +62,7 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
     override func refreshData() {
         
         HomeService.getHomeInvestDataWithMaxSize("3", completion: { (invest) -> Void in
+            self.tableView.headerEndRefreshing()
             if invest?.cjxnfsCode == 10000 {
                 self.homeData.investData = invest as! HomeInvestData
                 self.tableView.reloadData()
@@ -65,10 +70,12 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
                 UtilTool.noticError(view: self.view, msg: invest!.responseMsg!)
             }
             }) { (error) -> Void in
+                self.tableView.headerEndRefreshing()
                 UtilTool.noticError(view: self.view, msg: error.msg!)
         }
         
         HomeService.getHomeBenefitData(completion:{ (benefit) -> Void in
+            self.tableView.headerEndRefreshing()
             if benefit?.cjxnfsCode == 10000 {
                 self.homeData.benefitData = benefit as! HomeBenefitData
                 if self.checkHasData(0) {
@@ -78,6 +85,7 @@ class HomeViewController: BaseViewController , UITableViewDataSource , UITableVi
                 UtilTool.noticError(view: self.view, msg: benefit!.responseMsg!)
             }
             }) { (error) -> Void in
+                self.tableView.headerEndRefreshing()
                 UtilTool.noticError(view: self.view, msg: error.msg!)
         }
         

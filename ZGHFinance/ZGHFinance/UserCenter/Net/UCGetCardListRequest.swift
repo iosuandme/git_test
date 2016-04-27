@@ -42,6 +42,7 @@ class UCGetCardListRequest: BaseRequest {
             for bank in bankList {
                 let tmp                             = UCBankCardInfo()
                 tmp.cardName                        = (bank["banks"] as? Dictionary<String , AnyObject>)?["text"] + ""
+                tmp.cardId                          = bank["id"] + ""
                 tmp.cardNo                          = bank["bankNumber"] + ""
                 tmp.desc                            = bank["status"] + "" == "1" ? "默认绑定银行卡(不可更改)" : "非绑定银行卡"
                 bankData.cardList.append(tmp)
