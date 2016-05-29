@@ -703,6 +703,7 @@
 				TargetAttributes = {
 					6BA1ED831C8E787B002968F7 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = S7857BLL9E;
 					};
 					6BA1ED971C8E787B002968F7 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -933,7 +934,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -955,6 +956,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZGHFinance/Resource/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -978,7 +980,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ZhongGanHe(Beijing)Internet Technology Co., Ltd. (S7857BLL9E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ZhongGanHe(Beijing)Internet Technology Co., Ltd. (S7857BLL9E)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -993,6 +996,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZGHFinance/Resource/Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
@@ -1005,13 +1009,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jie Li (6S5Y6BNY96)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = ZGHFinance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.ZGHFinance;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.finance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a571cd20-e7e1-4cd2-8dca-5c6dabbd445d";
+				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
 			};
 			name = Debug;
 		};
@@ -1021,13 +1026,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jie Li (6S5Y6BNY96)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ZhongGanHe(Beijing)Internet Technology Co., Ltd. (S7857BLL9E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ZhongGanHe(Beijing)Internet Technology Co., Ltd. (S7857BLL9E)";
 				INFOPLIST_FILE = ZGHFinance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.ZGHFinance;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.finance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a571cd20-e7e1-4cd2-8dca-5c6dabbd445d";
+				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
 			};
 			name = Release;
 		};
@@ -1035,12 +1041,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jie Li (6S5Y6BNY96)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = ZGHFinanceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.ZGHFinanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a571cd20-e7e1-4cd2-8dca-5c6dabbd445d";
+				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGHFinance.app/ZGHFinance";
 			};
 			name = Debug;
@@ -1049,12 +1055,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jie Li (6S5Y6BNY96)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ZhongGanHe(Beijing)Internet Technology Co., Ltd. (S7857BLL9E)";
 				INFOPLIST_FILE = ZGHFinanceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.ZGHFinanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a571cd20-e7e1-4cd2-8dca-5c6dabbd445d";
+				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGHFinance.app/ZGHFinance";
 			};
 			name = Release;

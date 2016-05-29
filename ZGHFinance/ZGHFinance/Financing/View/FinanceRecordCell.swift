@@ -136,7 +136,7 @@ class FinanceRecordCell: UITableViewCell {
         
         avatarImg.image     = UIImage(named: "uc_login_icon.jpg")
         nickName.text       = recordInfo.name
-        let timeStr         = UtilDateTime.formatTime("yyyy-MM-dd HH:mm", time_interval: recordInfo.time)
+        let timeStr         = UtilDateTime.formatTime("yyyy-MM-dd HH:mm", time_interval: recordInfo.time / 1000)
         actionTime.text     = "投标时间  " + timeStr
         investAmount.text   = toWanString(recordInfo.amount, isReal: true) + "元"
         expectProfit.text   = toWanString(recordInfo.enableAmount, isReal: true) + "元"
