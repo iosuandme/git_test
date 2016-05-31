@@ -135,7 +135,13 @@ class FinanceRecordCell: UITableViewCell {
         }
         
         avatarImg.image     = UIImage(named: "uc_login_icon.jpg")
-        nickName.text       = recordInfo.name
+        var str             = ""
+        if recordInfo.name.length() > 1 {
+            str             = (recordInfo.name as NSString).substringToIndex(1) + "****" + (recordInfo.name as NSString).substringFromIndex(recordInfo.name.length() - 1)
+        }else{
+            str             = (recordInfo.name as NSString).substringToIndex(1) + "*****"
+        }
+        nickName.text       = str
         let timeStr         = UtilDateTime.formatTime("yyyy-MM-dd HH:mm", time_interval: recordInfo.time / 1000)
         actionTime.text     = "投标时间  " + timeStr
         investAmount.text   = toWanString(recordInfo.amount, isReal: true) + "元"
