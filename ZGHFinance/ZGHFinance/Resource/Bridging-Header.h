@@ -30,6 +30,7 @@
 #import <SDWebImageDecoder.h>
 #import <UIImage+GIF.h>
 #import <NSData+ImageContentType.h>
+#import "plugInBaseClass.h"
 //end
 
 #endif /* Bridging_Header_h */

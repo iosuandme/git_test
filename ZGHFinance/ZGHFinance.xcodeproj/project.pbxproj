@@ -74,6 +74,8 @@
 		6B7389CF1CCF92D400FFCD76 /* UCGetCardListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389CE1CCF92D400FFCD76 /* UCGetCardListRequest.swift */; };
 		6B7389D31CCFA01E00FFCD76 /* UCAddBankCardRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7389D21CCFA01E00FFCD76 /* UCAddBankCardRequest.swift */; };
 		6B7A6DF01C9FDB1D00B25E13 /* UCMobileCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */; };
+		6B7CF0381D1E27C30058B522 /* libP2P_LIB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7CF0361D1E27C30058B522 /* libP2P_LIB.a */; };
+		6B7CF0391D1E27C30058B522 /* P2PSOURCE.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6B7CF0371D1E27C30058B522 /* P2PSOURCE.bundle */; };
 		6B92F8E01CC361B1004BA55A /* UCMoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B92F8DF1CC361B1004BA55A /* UCMoreInfoViewController.swift */; };
 		6B9D6BF01C993FCC000F6167 /* UCUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */; };
 		6B9D6BF41C9948B3000F6167 /* UCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D6BF31C9948B3000F6167 /* UCService.swift */; };
@@ -186,6 +188,10 @@
 		6B7389CE1CCF92D400FFCD76 /* UCGetCardListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCGetCardListRequest.swift; sourceTree = "<group>"; };
 		6B7389D21CCFA01E00FFCD76 /* UCAddBankCardRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCAddBankCardRequest.swift; sourceTree = "<group>"; };
 		6B7A6DEF1C9FDB1D00B25E13 /* UCMobileCodeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCMobileCodeRequest.swift; sourceTree = "<group>"; };
+		6B7CF0341D1E27C30058B522 /* plugInBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plugInBaseClass.h; sourceTree = "<group>"; };
+		6B7CF0351D1E27C30058B522 /* ReturnResultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnResultDelegate.h; sourceTree = "<group>"; };
+		6B7CF0361D1E27C30058B522 /* libP2P_LIB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libP2P_LIB.a; sourceTree = "<group>"; };
+		6B7CF0371D1E27C30058B522 /* P2PSOURCE.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = P2PSOURCE.bundle; sourceTree = "<group>"; };
 		6B92F8DF1CC361B1004BA55A /* UCMoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCMoreInfoViewController.swift; sourceTree = "<group>"; };
 		6B9D6BEF1C993FCC000F6167 /* UCUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCUserData.swift; sourceTree = "<group>"; };
 		6B9D6BF31C9948B3000F6167 /* UCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCService.swift; sourceTree = "<group>"; };
@@ -229,6 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B7CF0381D1E27C30058B522 /* libP2P_LIB.a in Frameworks */,
 				5D7629824A62CC2D64FAB65C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +400,33 @@
 			path = YRPageControl;
 			sourceTree = "<group>";
 		};
+		6B7CF0311D1E27AF0058B522 /* 19pay */ = {
+			isa = PBXGroup;
+			children = (
+				6B7CF0321D1E27C30058B522 /* Lib */,
+			);
+			name = 19pay;
+			sourceTree = "<group>";
+		};
+		6B7CF0321D1E27C30058B522 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				6B7CF0331D1E27C30058B522 /* include */,
+				6B7CF0361D1E27C30058B522 /* libP2P_LIB.a */,
+				6B7CF0371D1E27C30058B522 /* P2PSOURCE.bundle */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		6B7CF0331D1E27C30058B522 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				6B7CF0341D1E27C30058B522 /* plugInBaseClass.h */,
+				6B7CF0351D1E27C30058B522 /* ReturnResultDelegate.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		6BA1ED7B1C8E787B002968F7 = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +450,7 @@
 		6BA1ED861C8E787B002968F7 /* ZGHFinance */ = {
 			isa = PBXGroup;
 			children = (
+				6B7CF0311D1E27AF0058B522 /* 19pay */,
 				6B46E9321C8E87FF00F7B009 /* Base */,
 				6B46E97A1C8E8A8500F7B009 /* CustomViews */,
 				6BA1EDBA1C8E7A6A002968F7 /* AppDelegate */,
@@ -736,6 +771,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BA1ED8F1C8E787B002968F7 /* Assets.xcassets in Resources */,
+				6B7CF0391D1E27C30058B522 /* P2PSOURCE.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,9 +1051,13 @@
 				INFOPLIST_FILE = ZGHFinance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZGHFinance/Lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.finance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
+				PROVISIONING_PROFILE = "df2325e2-e20b-44ae-aa98-c005af623c20";
 			};
 			name = Debug;
 		};
@@ -1032,9 +1072,13 @@
 				INFOPLIST_FILE = ZGHFinance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZGHFinance/Lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.finance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
+				PROVISIONING_PROFILE = "df2325e2-e20b-44ae-aa98-c005af623c20";
 			};
 			name = Release;
 		};
@@ -1042,13 +1086,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = ZGHFinanceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.ZGHFinanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
+				PROVISIONING_PROFILE = "df2325e2-e20b-44ae-aa98-c005af623c20";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGHFinance.app/ZGHFinance";
 			};
 			name = Debug;
@@ -1060,9 +1105,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ZhongGanHe(Beijing)Internet Technology Co., Ltd. (S7857BLL9E)";
 				INFOPLIST_FILE = ZGHFinanceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cjxnfs.ZGHFinanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bbb2af-4f6d-451a-849d-7366d90e06f5";
+				PROVISIONING_PROFILE = "df2325e2-e20b-44ae-aa98-c005af623c20";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZGHFinance.app/ZGHFinance";
 			};
 			name = Release;

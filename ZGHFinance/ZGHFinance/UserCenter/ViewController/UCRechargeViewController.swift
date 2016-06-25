@@ -299,6 +299,7 @@ class UCRechargeViewController: BaseViewController {
         }
         
         if error.isEmpty {
+            self.view.endEditing(true)
             let tmpAmount           = Int(Double(amountInput.text!)! * 100)
             let amount              = (Double(tmpAmount) / 100).formatDecimal(false)
             let confirmVc           = UCRechargeConfirmController()

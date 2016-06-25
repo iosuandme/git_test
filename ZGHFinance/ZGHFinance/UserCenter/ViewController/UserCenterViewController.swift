@@ -74,7 +74,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     }
     
     private func initHeader() {
-        let headerView                  = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 260))
+        let headerView                  = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 318))
         headerView.backgroundColor      = UtilTool.colorWithHexString("#efefef")
         
         let topView                     = UIView()
@@ -160,7 +160,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
             maker.height.equalTo()(12)
         }
         
-        /*let rechargeBtn                 = BaseButton()
+        let rechargeBtn                 = BaseButton()
         rechargeBtn.layer.cornerRadius  = 4
         rechargeBtn.tag                 = 888
         rechargeBtn.titleLabel?.font    = UIFont.systemFontOfSize(14)
@@ -192,7 +192,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
             maker.right.equalTo()(headerView).offset()(-32)
             maker.top.equalTo()(topView.mas_bottom).offset()(16)
             maker.height.equalTo()(40)
-        }*/
+        }
         
         let bottomView                  = UIView()
         bottomView.backgroundColor      = UIColor.whiteColor()
@@ -200,7 +200,7 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
         bottomView.mas_makeConstraints { (maker) in
             maker.left.equalTo()(headerView)
             maker.right.equalTo()(headerView)
-            maker.top.equalTo()(topView.mas_bottom).offset()(16)
+            maker.top.equalTo()(rechargeBtn.mas_bottom).offset()(16)
             maker.bottom.equalTo()(headerView).offset()(-16)
         }
         
@@ -483,6 +483,9 @@ class UserCenterViewController: BaseViewController , UITableViewDataSource , UIT
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if userInfo == nil {
+            return
+        }
         switch indexPath.row {
         case 0 :
             if UtilCheck.isLogin() {
